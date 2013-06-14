@@ -1,0 +1,62 @@
+﻿<s:SurfaceWindow x:Class="CameraVisualizations.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="CameraVisualizations"
+    >
+  <Grid>
+        <s:TagVisualizer
+            Name="MyTagVisualizer"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Background="White"
+            Height="Auto"
+            Width="Auto"
+            VisualizationAdded="OnVisualizationAdded"
+            >
+            <s:TagVisualizer.Definitions>
+                <s:TagVisualizationDefinition Value="0x1"
+                                              Source="CameraVisualization.xaml"
+                                              LostTagTimeout="2000"
+                                              MaxCount="2"
+                                              OrientationOffsetFromTag="0"
+                                              PhysicalCenterOffsetFromTag="2,2"
+                                              TagRemovedBehavior="Fade"
+                                              UsesTagOrientation="True"
+                                              />
+                <s:TagVisualizationDefinition Value="0x2"
+                                              Source="CameraVisualization.xaml"
+                                              LostTagTimeout="2000"
+                                              MaxCount="2"
+                                              OrientationOffsetFromTag="0"
+                                              PhysicalCenterOffsetFromTag="2,2"
+                                              TagRemovedBehavior="Fade"
+                                              UsesTagOrientation="True"
+                                              />
+                <s:TagVisualizationDefinition Value="0x3"
+                                              Source="CameraVisualization.xaml"
+                                              LostTagTimeout="2000"
+                                              MaxCount="2"
+                                              OrientationOffsetFromTag="0"
+                                              PhysicalCenterOffsetFromTag="2,2"
+                                              TagRemovedBehavior="Fade"
+                                              UsesTagOrientation="True"
+                                              />
+                <s:TagVisualizationDefinition Value="0x4"
+                                              Source="CameraVisualization.xaml"
+                                              LostTagTimeout="2000"
+                                              MaxCount="2"
+                                              OrientationOffsetFromTag="0"
+                                              PhysicalCenterOffsetFromTag="2,2"
+                                              TagRemovedBehavior="Fade"
+                                              UsesTagOrientation="True"
+                                              />
+
+
+
+
+
+            </s:TagVisualizer.Definitions>
+        </s:TagVisualizer>
+  </Grid>
+</s:SurfaceWindow>

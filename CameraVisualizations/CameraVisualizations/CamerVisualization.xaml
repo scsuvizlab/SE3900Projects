@@ -1,0 +1,20 @@
+﻿<s:TagVisualization x:Class="CameraVisualizations.CamerVisualization"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Loaded="CamerVisualization_Loaded"
+    Height ="400"
+    Width="400">
+    
+    <Grid>
+        
+        <Ellipse Name="myEllipse"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"/>
+        <Label Name="CameraModel"
+               Content="Model"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
+            
+    </Grid>
+</s:TagVisualization>
