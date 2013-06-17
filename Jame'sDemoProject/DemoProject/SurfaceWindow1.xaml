@@ -1,0 +1,33 @@
+﻿<s:SurfaceWindow x:Class="DemoProject.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="DemoProject" Name="MainAppWindow" ResizeMode="NoResize" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="483" d:DesignWidth="637" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="/DemoProject;component/Images/stock-vector-tennis-racquets-and-ball-3701443.jpg" Cursor="None">
+    <s:SurfaceWindow.Background>
+        <ImageBrush ImageSource="/DemoProject;component/Images/tennis-court-hi.png" />
+    </s:SurfaceWindow.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="18*" />
+            <ColumnDefinition Width="588*" />
+            <ColumnDefinition Width="9*" />
+        </Grid.ColumnDefinitions>
+        <s:ScatterView Height="Auto" HorizontalAlignment="Left" Name="scatterView1" VerticalAlignment="Top" Width="Auto" Cursor="None" Grid.ColumnSpan="3" Margin="0,-12,0,0">
+            <s:ScatterViewItem Opacity="1" TouchMove="ScatterViewItem_TouchMove">
+                <s:ScatterViewItem.Background>
+                    <ImageBrush ImageSource="/DemoProject;component/Images/tennis-racket-vector-265019-2.png" />
+                </s:ScatterViewItem.Background>
+            </s:ScatterViewItem>
+            <s:ScatterViewItem>
+                <s:ScatterViewItem.Background>
+                    <ImageBrush ImageSource="/DemoProject;component/Images/tennis-racket-vector-256467.png" />
+                </s:ScatterViewItem.Background>
+            </s:ScatterViewItem>
+            <s:ScatterViewItem TouchMove="ScatterViewItem_TouchMove">
+                <s:ScatterViewItem.Background>
+                    <ImageBrush ImageSource="/DemoProject;component/Images/591100-tennis-ball-1.png" Stretch="UniformToFill" TileMode="None" />
+                </s:ScatterViewItem.Background>
+            </s:ScatterViewItem>
+        </s:ScatterView>
+    </Grid>
+</s:SurfaceWindow>
