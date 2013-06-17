@@ -5,7 +5,7 @@
     Title="DemoProject" Name="MainAppWindow" ResizeMode="NoResize" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="483" d:DesignWidth="637" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Maximized">
   <Grid>
         <s:ScatterView Height="Auto" HorizontalAlignment="Left" Margin="0" Name="scatterView1" VerticalAlignment="Top" Width="Auto">
-            <s:ScatterView Height="100" HorizontalAlignment="Left" Name="scatterView2" VerticalAlignment="Top" Width="200" />
+            <s:ScatterViewItem Height="100" HorizontalAlignment="Left" Name="scatterView2" VerticalAlignment="Top" Width="200" />
         </s:ScatterView>
     </Grid>
 </s:SurfaceWindow>

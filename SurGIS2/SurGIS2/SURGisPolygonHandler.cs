@@ -22,7 +22,7 @@ using System.Text;
  * polygon, deleting the polygon, changing any of the polygon metadata, or moving/creating/deleting any of the 
  * points that make up the polygon.
  * 
- * 
+ * Polygons and Points should be handled in different classes.
  * 
  * 
  * */
