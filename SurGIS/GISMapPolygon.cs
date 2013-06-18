@@ -39,67 +39,54 @@ namespace SurGIS
         public GISMapPoints GMPoint = new GISMapPoints();      
 
         // This is for creating polygons from touches on the map
+
+        public void ConvertPointLocations(MapPolygon NewPolygon, ArrayList GMPointLocations)
+        {
+            foreach(GISMapPoint testPoint in GMPointLocations)
+            {
+                NewPolygon.Locations.Add(testPoint.PointLocation);
+            }
+        }
+
         public void AddPolygon(SurfaceWindow1 mapwindow)
         {
 
             MapPolygon NewPolygon = new MapPolygon();
 
-            NewPolygon.Locations = new LocationCollection();
-            NewPolygon.Locations = GMPoint.PointsList;
+            NewPolygon.Locations = new LocationCollection();           
+            //NewPolygon.Locations = GMPoint.PointsList;
+            ConvertPointLocations(NewPolygon, GMPoint.MapPoints);
 
-            //  PolyGonCount++;
             NewPolygon.Fill = new SolidColorBrush(Colors.Maroon);
             NewPolygon.Stroke = new SolidColorBrush(Colors.Gold);
             NewPolygon.StrokeThickness = 2;
             NewPolygon.Opacity = 0.8;
             mapwindow.PolygonLayer.Children.Add(NewPolygon);
-            //GMPoint.AddPolyPoint = false;
-            
-
+                        
             MapPolygons.Add(NewPolygon);
             NewPolygon.Name = "MapPoly" + MapPolygons.Count.ToString();
             NewPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);
             GMPoint.PointsList = new LocationCollection();
-
-            //try
-            //{
-            //    aPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);
-            //    mapwindow.PolygonLayer.Children.Add(aPolygon);
-            //    MapPolygons.Add(aPolygon);
-            //}
-            //catch
-            //{
-            //    // don't do anything.
-            //}
         }
-
     
         public void Polygon_TouchDown(object sender, TouchEventArgs e)
         {
             MapPolygon TouchPolygon = sender as MapPolygon;
-
+            
             if (TouchPolygon.Equals(SelectedPolygon))
             {
                 DeselectAll();
-
-                //txtDescription.Text = "Select a Polygon";
             }
             else
             {
                 SelectedPolygon = TouchPolygon;
                 UpdateColors(TouchPolygon);
-
-                //txtDescription.Text = "Polygon " + TouchPolygon.Name + " Selected.\n";
+                
                 int pointCounter = 1;
 
-
-
                 foreach (Location p in TouchPolygon.Locations)
-                {
-                  //  txtDescription.Text += "Point " + pointCounter.ToString() + ": Lat:" + p.Latitude.ToString()
-                    //    + ", Long:" + p.Longitude.ToString() + "\n";
+                {                  
                     pointCounter++;
-
                 }
             }
         }
@@ -112,19 +99,15 @@ namespace SurGIS
 
                 MapPolygon test = MapPolygons[i] as MapPolygon;
                 if (Polygon.Equals(MapPolygons[i]) && Polygon != null)
-                {
-                    //  PolygonLayer.Children.Remove(Polygon);
+                {                    
                     test.Stroke = new SolidColorBrush(Colors.Wheat);
-                    test.Fill = new SolidColorBrush(Colors.Blue);
-                    //   PolygonLayer.Children.Add(Polygon);                    
+                    test.Fill = new SolidColorBrush(Colors.Blue);                    
                 }
                 else // not the selected polygon... reset it's color
                 {
                     test.Stroke = new SolidColorBrush(Colors.Gold);
                     test.Fill = new SolidColorBrush(Colors.Maroon);
                 }
-
-
             }
         }
         private void DeselectAll()
@@ -137,12 +120,9 @@ namespace SurGIS
 
         public void ClearMapPolies()
         {
-            MapPolygons.Clear();
-           // PolygonLayer.Children.Clear();
+            MapPolygons.Clear();           
             MapPolygon Dummy = new MapPolygon();
             SelectedPolygon = null;
-        }
-
-        
+        }        
     }
 }

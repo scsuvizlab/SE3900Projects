@@ -28,84 +28,103 @@ using System.ComponentModel;
 
 namespace SurGIS
 {
+
+    class GISMapPoint
+    {
+
+        public Location PointLocation;
+        public Rectangle pointrect;
+              
+        public GISMapPoint() 
+        {
+            pointrect = new Rectangle();
+            pointrect.Fill = new SolidColorBrush(Colors.Maroon);
+            pointrect.Stroke = new SolidColorBrush(Colors.Gold);
+            pointrect.StrokeThickness = 1;
+            pointrect.Width = 8;
+            pointrect.Height = 8;                        
+        }
+
+        
+
+    }
+
     class GISMapPoints
     {
         public ArrayList MapPoints = new ArrayList();
         public LocationCollection PointsList = new LocationCollection();
         public bool AddPolyPoint = false;
-        public Point SelectedPoint = new Point();
-
-         public void AddPoint(Location PushPinLocation,SurfaceWindow1 surfaceWindow1)
-        {
+        public GISMapPoint SelectedPoint = new GISMapPoint();        
+        
+        public void AddPoint(Location PushPinLocation,SurfaceWindow1 surfaceWindow1)
+         {
             if (AddPolyPoint)
             {
-                Rectangle r = new Rectangle();
-                r.Fill = new SolidColorBrush(Colors.Maroon);
-                r.Stroke = new SolidColorBrush(Colors.Gold);
-                r.StrokeThickness = 1;
-                r.Width = 8;
-                r.Height = 8;
-                surfaceWindow1.PolyPointLayer.AddChild(r, PushPinLocation);
+                GISMapPoint GMPoint = new GISMapPoint();
+                GMPoint.PointLocation = PushPinLocation;                
+                surfaceWindow1.PolyPointLayer.AddChild(GMPoint.pointrect, PushPinLocation);
+                MapPoints.Add(GMPoint);
                 PointsList.Add(PushPinLocation);
+                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);                
             }
         }
 
-         //public void Point_TouchDown(object sender, TouchEventArgs e)
-         //{
-         //    //Still Working on this so comment out
-         //    //Point TouchPoint = sender as Point;
+         public void Point_TouchDown(object sender, TouchEventArgs e)
+         {
+             //Still Working on this so comment out
+             Rectangle TouchPoint = sender as Rectangle;
 
-         //    if (TouchPoint.Equals(SelectedPoint))
-         //    {
-         //        DeselectAll();                 
-         //    }
-         //    else
-         //    {
-         //        SelectedPoint = TouchPoint;
-         //        UpdateColors(TouchPoint);
-                 
-         //        int pointCounter = 1;
+             if (TouchPoint.Equals(SelectedPoint.pointrect))
+             {
+                 DeselectAll();
+             }
+             else
+             {
+                 SelectedPoint.pointrect = TouchPoint;
+                 UpdateColors(TouchPoint);
 
-         //        foreach (Location p in TouchPoint)
-         //        {
-         //            //  txtDescription.Text += "Point " + pointCounter.ToString() + ": Lat:" + p.Latitude.ToString()
-         //            //    + ", Long:" + p.Longitude.ToString() + "\n";
-         //            pointCounter++;
-         //        }
-         //    }
-         //}
+                 //int pointCounter = 1;
 
-         //private void UpdateColors(Point Point)
-         //{
+                 //foreach (Location p in TouchPoint)
+                 //{
+                 //    //  txtDescription.Text += "Point " + pointCounter.ToString() + ": Lat:" + p.Latitude.ToString()
+                 //    //    + ", Long:" + p.Longitude.ToString() + "\n";
+                 //    pointCounter++;
+                 //}
+             }
+         }
 
-         //    for (int i = 0; i < MapPoints.Count; i++)
-         //    {
+         private void UpdateColors(Rectangle pointrect)
+         {
 
-         //        Rectangle r = new Rectangle();
-         //        //Point test = MapPoints[i] as Point;
-         //        if (Point.Equals(MapPoints[i]) && Point != null)
-         //        {
-         //            //  PolygonLayer.Children.Remove(Polygon);
-         //            r.Stroke = new SolidColorBrush(Colors.Wheat);
-         //            r.Fill = new SolidColorBrush(Colors.Blue);
-         //            //   PolygonLayer.Children.Add(Polygon);                    
-         //        }
-         //        else // not the selected polygon... reset it's color
-         //        {
-         //            r.Stroke = new SolidColorBrush(Colors.Gold);
-         //            r.Fill = new SolidColorBrush(Colors.Maroon);
-         //        }
+             for (int i = 0; i < MapPoints.Count; i++)
+             {
+
+                 //Rectangle r = new Rectangle();
+                 GISMapPoint test = MapPoints[i] as GISMapPoint;
+                 if (pointrect.Equals(test.pointrect) && pointrect != null)
+                 {
+                     //  PolygonLayer.Children.Remove(Polygon);
+                     test.pointrect.Stroke = new SolidColorBrush(Colors.Wheat);
+                     test.pointrect.Fill = new SolidColorBrush(Colors.Blue);
+                     //   PolygonLayer.Children.Add(Polygon);                    
+                 }
+                 else // not the selected polygon... reset it's color
+                 {
+                     test.pointrect.Stroke = new SolidColorBrush(Colors.Gold);
+                     test.pointrect.Fill = new SolidColorBrush(Colors.Maroon);
+                 }
 
 
-         //    }
-         //}
-         //private void DeselectAll()
-         //{
-         //    this.SelectedPoint = new Point();
-         //   // this.SelectedPoint = null;
-         //    Point Dummy = new Point();
-         //    UpdateColors(Dummy);
-         //}
+             }
+         }
+         private void DeselectAll()
+         {
+             this.SelectedPoint = new GISMapPoint();
+             this.SelectedPoint = null;
+             GISMapPoint Dummy = new GISMapPoint();
+             UpdateColors(Dummy.pointrect);
+         }
 
     }
 }
