@@ -439,6 +439,72 @@ namespace SurGIS
 
         }
 
+      /*  public void WriteXMLData(string Filename)
+        {
+            
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlNode GISDataNode = xmlDoc.CreateElement("GISData");
+            xmlDoc.AppendChild(GISDataNode);
+
+            XmlNode ImageNode = xmlDoc.CreateElement("GISImage");
+            XmlAttribute ImageFileAttribute = xmlDoc.CreateAttribute("file");
+            ImageFileAttribute.Value = Filename + ".png";
+            ImageNode.Attributes.Append(ImageFileAttribute);
+
+            XmlNode LocationNode = xmlDoc.CreateElement("MapLoc");
+            XmlAttribute MapLatAttribute = xmlDoc.CreateAttribute("lat");
+            XmlAttribute MapLongAttribute = xmlDoc.CreateAttribute("long");
+            XmlAttribute MapCameraLevel = xmlDoc.CreateAttribute("alt");
+
+            MapLatAttribute.Value = myMap.Center.Latitude.ToString();
+            MapLongAttribute.Value = myMap.Center.Longitude.ToString();
+            MapCameraLevel.Value = myMap.ZoomLevel.ToString();
+
+            
+            XmlNode PolyNode = xmlDoc.CreateElement("Polygons");
+
+            foreach(MapPolygon MapPoly in  GMPolygon.MapPolygons)
+            {
+
+            XmlNode PolygonNode = xmlDoc.CreateElement("Polygon");
+            XmlAttribute PolyName = xmlDoc.CreateAttribute("name");
+            PolyName.Value = MapPoly.Name;
+            PolygonNode.Attributes.Append(PolyName);
+                
+            foreach (Location Point in MapPoly.Locations)
+            {
+                XmlElement PolyPoint = xmlDoc.CreateElement("Point");
+                XmlAttribute PointLat = xmlDoc.CreateAttribute("lat");
+                XmlAttribute PointLong = xmlDoc.CreateAttribute("long");
+                PointLat.Value = Point.Latitude.ToString();
+                PointLong.Value = Point.Longitude.ToString();
+
+                PolyPoint.Attributes.Append(PointLat);
+                PolyPoint.Attributes.Append(PointLong);
+
+                PolygonNode.AppendChild(PolyPoint);
+            }
+            PolyNode.AppendChild(PolygonNode);
+            }
+
+            LocationNode.Attributes.Append(MapLatAttribute);
+            LocationNode.Attributes.Append(MapLongAttribute);
+            LocationNode.Attributes.Append(MapCameraLevel);
+
+            GISDataNode.AppendChild(LocationNode);
+            GISDataNode.AppendChild(ImageNode);
+            GISDataNode.AppendChild(PolyNode);
+
+
+            try
+            {
+                xmlDoc.Save(Filename + ".xml");
+            }
+            catch
+            {
+                MessageBoxResult result = MessageBox.Show("XMLWriteError", "XML Write Error");
+            }
+        } */
 
         private void ShareBMPButton_Click(object sender, RoutedEventArgs e)
         {
@@ -553,6 +619,8 @@ namespace SurGIS
             Point TPosition = TouchP.Position;
             Location PushPinLocation = myMap.ViewportPointToLocation(TPosition);
             GMPolygon.GMPoint.AddPoint(PushPinLocation, this);
+
+            if(GMPolygon.GMPoint
 
         }
 
@@ -914,6 +982,13 @@ namespace SurGIS
             LocalBMPList.Items.Add(NewImageItem);
 
         }
+
+       /* public XmlDocument ReadXMLData(XmlDocument xmlDoc, string FullPath)
+        {
+            xmlDoc.Load(FullPath);
+            
+            return xmlDoc;
+        } */
         
         public void ImageItem_selected(object sender, RoutedEventArgs e)
         {
@@ -961,9 +1036,6 @@ namespace SurGIS
 
                XmlNodeList Polygons = xmlDoc.SelectNodes("//GISData/Polygons/Polygon");
 
-               //=================================
-               //This appears to be where imported polygons are drawn - Tom O.
-               //=================================
                foreach (XmlNode Polygon in Polygons)
                {
                    
