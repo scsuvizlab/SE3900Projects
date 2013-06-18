@@ -64,7 +64,7 @@ namespace SurGIS
                 GMPoint.PointLocation = PushPinLocation;                
                 surfaceWindow1.PolyPointLayer.AddChild(GMPoint.pointrect, PushPinLocation);
                 MapPoints.Add(GMPoint);
-                PointsList.Add(PushPinLocation);
+                PointsList.Add(PushPinLocation);                
                 GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);                
             }
         }

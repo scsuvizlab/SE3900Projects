@@ -620,7 +620,10 @@ namespace SurGIS
             Location PushPinLocation = myMap.ViewportPointToLocation(TPosition);
             GMPolygon.GMPoint.AddPoint(PushPinLocation, this);
 
-            if(GMPolygon.GMPoint
+            //if (GMPolygon.GMPoint)
+            //{
+
+            //}
 
         }
 
