@@ -65,63 +65,50 @@ namespace SurGIS
                 surfaceWindow1.PolyPointLayer.AddChild(GMPoint.pointrect, PushPinLocation);
                 MapPoints.Add(GMPoint);
                 PointsList.Add(PushPinLocation);                
-                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);                
+                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);
+                              
             }
         }
 
+       
+
          public void Point_TouchDown(object sender, TouchEventArgs e)
-         {
-             //Still Working on this so comment out
+         {             
              Rectangle TouchPoint = sender as Rectangle;
 
              if (TouchPoint.Equals(SelectedPoint.pointrect))
              {
                  DeselectAll();
+                 SelectedPoint.pointrect = null;
              }
              else
              {
                  SelectedPoint.pointrect = TouchPoint;
-                 UpdateColors(TouchPoint);
-
-                 //int pointCounter = 1;
-
-                 //foreach (Location p in TouchPoint)
-                 //{
-                 //    //  txtDescription.Text += "Point " + pointCounter.ToString() + ": Lat:" + p.Latitude.ToString()
-                 //    //    + ", Long:" + p.Longitude.ToString() + "\n";
-                 //    pointCounter++;
-                 //}
+                 UpdateColors(TouchPoint);                 
              }
          }
 
-         private void UpdateColors(Rectangle pointrect)
+         public void UpdateColors(Rectangle pointrect)
          {
 
              for (int i = 0; i < MapPoints.Count; i++)
-             {
-
-                 //Rectangle r = new Rectangle();
+             {                 
                  GISMapPoint test = MapPoints[i] as GISMapPoint;
                  if (pointrect.Equals(test.pointrect) && pointrect != null)
-                 {
-                     //  PolygonLayer.Children.Remove(Polygon);
+                 {                     
                      test.pointrect.Stroke = new SolidColorBrush(Colors.Wheat);
-                     test.pointrect.Fill = new SolidColorBrush(Colors.Blue);
-                     //   PolygonLayer.Children.Add(Polygon);                    
+                     test.pointrect.Fill = new SolidColorBrush(Colors.Blue);                     
                  }
                  else // not the selected polygon... reset it's color
                  {
                      test.pointrect.Stroke = new SolidColorBrush(Colors.Gold);
                      test.pointrect.Fill = new SolidColorBrush(Colors.Maroon);
                  }
-
-
              }
          }
-         private void DeselectAll()
+         public void DeselectAll()
          {
-             this.SelectedPoint = new GISMapPoint();
-             this.SelectedPoint = null;
+             this.SelectedPoint = new GISMapPoint();             
              GISMapPoint Dummy = new GISMapPoint();
              UpdateColors(Dummy.pointrect);
          }

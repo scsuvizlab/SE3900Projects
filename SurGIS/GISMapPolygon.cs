@@ -65,9 +65,9 @@ namespace SurGIS
                         
             MapPolygons.Add(NewPolygon);
             NewPolygon.Name = "MapPoly" + MapPolygons.Count.ToString();
-            NewPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);
+            NewPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);            
             GMPoint.PointsList = new LocationCollection();
-        }
+        }        
     
         public void Polygon_TouchDown(object sender, TouchEventArgs e)
         {
