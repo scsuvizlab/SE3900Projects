@@ -610,17 +610,17 @@ namespace SurGIS
 
         }
 
-        //public void Point_TouchMove(object sender, TouchEventArgs e)
-        //{
-        //    Rectangle TouchPoint = sender as Rectangle;
+        public void Point_TouchMove(object sender, TouchEventArgs e)
+        {
+            Rectangle TouchPoint = sender as Rectangle;
 
 
-        //        GMPolygon.GMPoint.SelectedPoint.pointrect = new Rectangle();
-        //        GMPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;
-        //        TouchPoint = null;
-                
-            
-        //}
+            //GMPolygon.GMPoint.SelectedPoint.pointrect = new Rectangle();
+            GMPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;
+            //TouchPoint = null;
+
+
+        }
 
         private void AddPoint(object sender, TouchEventArgs e)
         {
@@ -629,14 +629,13 @@ namespace SurGIS
             Location PointLocation = new Location();
             TouchPoint TouchP = e.GetTouchPoint(myMap);
             Point TPosition = TouchP.Position;
-            Location PushPinLocation = myMap.ViewportPointToLocation(TPosition);
-            GMPolygon.GMPoint.AddPoint(PushPinLocation, this);
+            Location MapTouchPointLocation = myMap.ViewportPointToLocation(TPosition);
+            GMPolygon.GMPoint.AddPoint(MapTouchPointLocation, this);
 
-            //if (!GMPolygon.GMPoint.AddPolyPoint)
-            //{
-
-            //    GMPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(Point_TouchMove);
-            //}
+            if (!GMPolygon.GMPoint.AddPolyPoint)
+            {
+                GMPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(Point_TouchMove);
+            }
 
         }
 
@@ -691,6 +690,7 @@ namespace SurGIS
         {
             GMPolygon.AddPolygon(this);
             GMPolygon.GMPoint.AddPolyPoint = false;
+            myMap.Children.Remove(PolyPointLayer);
             PolyPointButton.Content = "Polygon";
             PolyCreateButton.Content = "";
         } 

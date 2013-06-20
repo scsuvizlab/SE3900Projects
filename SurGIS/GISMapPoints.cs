@@ -42,7 +42,7 @@ namespace SurGIS
             pointrect.Stroke = new SolidColorBrush(Colors.Gold);
             pointrect.StrokeThickness = 1;
             pointrect.Width = 8;
-            pointrect.Height = 8;                        
+            pointrect.Height = 8;                 
         }
 
         
@@ -51,26 +51,40 @@ namespace SurGIS
 
     class GISMapPoints
     {
-        public ArrayList MapPoints = new ArrayList();
-        public LocationCollection PointsList = new LocationCollection();
-        public bool AddPolyPoint = false;
-        public GISMapPoint SelectedPoint = new GISMapPoint();        
+        public ArrayList MapPoints = new ArrayList();        
+        public bool AddPolyPoint = false;                
+        public GISMapPoint SelectedPoint = new GISMapPoint();
+        //public SurfaceWindow1 mapwindow = new SurfaceWindow1();
+
+        /*
+         * This is where we tried to create a new AddPoint Method that has only one purpose, which is to redraw the points on a SelectedPolygon. right now the method is Empty 
+         * since we have not yet been able to pass in the SurfaceWindow1 into the Polygon_TouchDown Method.
+         */
+
+        //used for showing points when a polygon is selected.
+        public void AddPoint(Location TempLocation)
+        {
+            
+        }
         
-        public void AddPoint(Location PushPinLocation,SurfaceWindow1 surfaceWindow1)
+        //used for plotting the points for drawing a polygon.
+        public void AddPoint(Location MapPointLocation,SurfaceWindow1 mapwindow)
          {
             if (AddPolyPoint)
             {
                 GISMapPoint GMPoint = new GISMapPoint();
-                GMPoint.PointLocation = PushPinLocation;                
-                surfaceWindow1.PolyPointLayer.AddChild(GMPoint.pointrect, PushPinLocation);
-                MapPoints.Add(GMPoint);
-                PointsList.Add(PushPinLocation);                
+                GMPoint.PointLocation = MapPointLocation;                
+                mapwindow.PolyPointLayer.AddChild(GMPoint.pointrect, MapPointLocation);
+                MapPoints.Add(GMPoint);               
                 GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);
                               
             }
+            
+            if (SelectedPoint != null)
+            {                
+                GISMapPolygon.FindPoint(SelectedPoint, mapwindow);                        
+            }
         }
-
-       
 
          public void Point_TouchDown(object sender, TouchEventArgs e)
          {             
@@ -78,8 +92,7 @@ namespace SurGIS
 
              if (TouchPoint.Equals(SelectedPoint.pointrect))
              {
-                 DeselectAll();
-                 SelectedPoint.pointrect = null;
+                 DeselectAll();                 
              }
              else
              {
