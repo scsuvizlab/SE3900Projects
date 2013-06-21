@@ -25,6 +25,7 @@
         </Style>
     </UserControl.Resources>
     
+
     <s:ScatterView >
         <s:ScatterViewItem Width="700" Height="500" Padding="25">
 
