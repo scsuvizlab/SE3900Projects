@@ -48,6 +48,10 @@ namespace SurGIS2
     /// <summary>
     /// Interaction logic for SurfaceWindow1.xaml
     /// </summary>
+    /// 
+       
+
+
     public partial class SurfaceWindow1 : SurfaceWindow
     {
         /// <summary>
@@ -56,9 +60,11 @@ namespace SurGIS2
         /// 
 
         // File Hander
-       public GISFileHandler FileHander = new GISFileHandler();
-       public SURGisPolygonHandler PolygonHandler = new SURGisPolygonHandler();
-       public GISMainMap MainMap;
+
+     //  public  SurGIS2.GISFileHandler FileHander = new GISFileHandler();
+       // public Surgis2.GISFileHandler FileHander = new GISFileHandler();
+     //   public SURGisPolygonHandler PolygonHandler = new SURGisPolygonHandler();
+        public GISMainMap MainMap;
 
 
         
@@ -72,7 +78,7 @@ namespace SurGIS2
 
            
             // adds the map to the main window
-            this.AddChild(MainMap);
+            MainScatterView.Items.Add(MainMap);
 
         }
 

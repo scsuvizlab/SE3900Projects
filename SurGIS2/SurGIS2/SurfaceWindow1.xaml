@@ -3,7 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Title="SurGIS2" Name="SurGISWindow">
+               
+                 
+                 <s:ScatterView Name="MainScatterView">
   <Grid>
 
   </Grid>
+                 </s:ScatterView>
 </s:SurfaceWindow>
