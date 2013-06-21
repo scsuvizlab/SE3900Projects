@@ -58,6 +58,8 @@ namespace SurGIS2
         // File Hander
         GISFileHandler FileHander = new GISFileHandler();
         SURGisPolygonHandler PolygonHandler = new SURGisPolygonHandler();
+        GISMainMap MainMap = new GISMainMap(this);
+
 
         
         public SurfaceWindow1()
@@ -66,6 +68,8 @@ namespace SurGIS2
 
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
+        
+            SurGISWindow.AddChild(MainMap);  // adds the map to the main window
         }
 
         /// <summary>
