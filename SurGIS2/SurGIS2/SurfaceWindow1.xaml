@@ -7,6 +7,11 @@
                  
                  <s:ScatterView Name="MainScatterView">
 
+        <s:LibraryStack Background="#FF368FC7">
+            <s:LibraryStackItem Content="StackItem" Background="#FFC72E2E" />
+            <s:LibraryStackItem Content="StackItem2" />
+        </s:LibraryStack>
+
         <s:ScatterViewItem Name="PolyPointButtonScatterITem">
             <s:SurfaceButton Name="PolyPointButton" Click="PolyPointButton_Click" Content="Add Poly">
                 
