@@ -68,6 +68,7 @@
     <Compile Include="GISMainMap.xaml.cs">
       <DependentUpon>GISMainMap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GISMapPoints.cs" />
     <Compile Include="GISPreviewControl.xaml.cs">
       <DependentUpon>GISPreviewControl.xaml</DependentUpon>
     </Compile>

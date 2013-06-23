@@ -2,12 +2,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
-    Title="SurGIS2" Name="SurGISWindow">
+    Title="SurGIS2" Name="SurGISWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="273" d:DesignWidth="393" SizeToContent="WidthAndHeight">
                
                  
                  <s:ScatterView Name="MainScatterView">
-  <Grid>
 
-  </Grid>
-                 </s:ScatterView>
+        <s:ScatterViewItem Name="PolyPointButtonScatterITem">
+            <s:SurfaceButton Name="PolyPointButton" Click="PolyPointButton_Click" Content="Add Poly">
+                
+            </s:SurfaceButton>
+        </s:ScatterViewItem>
+
+    </s:ScatterView>
 </s:SurfaceWindow>

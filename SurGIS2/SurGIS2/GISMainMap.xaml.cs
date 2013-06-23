@@ -95,6 +95,8 @@ namespace SurGIS2
             // The default animation level: navigate between different map locations.
             //viewMap.AnimationLevel = AnimationLevel.Full;
 
+            // surfacewindow is a global handle back to the main program.
+            surfaceWindow = ProgramWindow;
 
         }
          private void viewMap_ViewChangeOnFrame(object sender, MapEventArgs e)
