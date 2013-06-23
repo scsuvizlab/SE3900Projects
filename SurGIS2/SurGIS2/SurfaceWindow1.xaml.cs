@@ -12,9 +12,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Surface;
+using Microsoft.Surface.Presentation.Generic;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
+using Microsoft.Maps.MapControl.WPF;
+using System.Xml;
+using System.Xml.XPath;
+using System.Net;
+using System.Collections;
+//using Catfood.Shapefile;
+using Microsoft.Win32;
+using System.Windows.Threading;
+using System.ComponentModel;
+using System.IO;
 
 /*
  * ++++++++++++++++++  SurfaceWindow1 +++++++++++++++
@@ -48,16 +59,21 @@ namespace SurGIS2
     /// <summary>
     /// Interaction logic for SurfaceWindow1.xaml
     /// </summary>
+    /// 
+       
+
+
     public partial class SurfaceWindow1 : SurfaceWindow
     {
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// 
+        bool AddPolyMode = false;
+       
+        public GISMapPolygon MapPolygon;
+        public GISMainMap MainMap;
 
-        // File Hander
-        GISFileHandler FileHander = new GISFileHandler();
-        SURGisPolygonHandler PolygonHandler = new SURGisPolygonHandler();
 
         
         public SurfaceWindow1()
@@ -66,7 +82,21 @@ namespace SurGIS2
 
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
+            MainMap = new GISMainMap(this);
+
+           
+            // adds the map to the main window
+            MainScatterView.Items.Add(MainMap);
+            MainMap.MapTileOverlay.TouchDown += new EventHandler<TouchEventArgs>(AddPoint);
+
+            // Adds a polygon handler class.  This should handle all the polygon functions
+            MapPolygon = new GISMapPolygon(this);
+            
+
         }
+
+        // All the default availability handlers.
+        #region DEFAULT
 
         /// <summary>
         /// Occurs when the window is about to close. 
@@ -133,5 +163,70 @@ namespace SurGIS2
         {
             //TODO: disable audio, animations here
         }
+        #endregion 
+
+
+        // All the polygon stuff goes in this region.
+        #region PolygonStuff  
+
+        private void AddPoint(object sender, TouchEventArgs e)
+        {
+
+
+            Location PointLocation = new Location();
+            TouchPoint TouchP = e.GetTouchPoint(MainMap);
+            Point TPosition = TouchP.Position;
+            Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);
+            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);
+
+            if (!MapPolygon.GMPoint.AddPolyPoint)
+            {
+                MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(Point_TouchMove);
+            }
+
+        }
+
+        public void Point_TouchMove(object sender, TouchEventArgs e)
+        {
+            Rectangle TouchPoint = sender as Rectangle;
+
+
+            //GMPolygon.GMPoint.SelectedPoint.pointrect = new Rectangle();
+            MapPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;
+            //TouchPoint = null;
+
+
+        }
+
+        //  This toggles the polycreation mode of the map
+
+        private void PolyPointButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (AddPolyMode)
+            {
+                PolyPointButton.Content = "Add Poly";
+                MapPolygon.AddPolygon();
+                AddPolyMode = false;
+                MapPolygon.GMPoint.AddPolyPoint = false;
+            }
+            else
+            {
+                PolyPointButton.Content = "Create";
+                AddPolyMode = true;
+                MapPolygon.GMPoint.AddPolyPoint = true;
+
+            }
+
+        }
+
+
+        #endregion
+
+     
+
+
     }
+
+
+
 }

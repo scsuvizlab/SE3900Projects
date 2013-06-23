@@ -47,6 +47,8 @@
                 <m:Map x:Name="MapTileOverlay" MouseDoubleClick="MapWithPushpins_MouseDoubleClick"
                   CredentialsProvider="AkrxDoVF81cNDLiNXWiVCzeOT3hrtspPyJUiMHxQcO0wd-tLAX7p8GCBaWPwI-PO" 
                   Center="37.14814, -119.64424" ZoomLevel="6" Mode="Road" Grid.RowSpan="5" Grid.ColumnSpan="3" Padding="5" AnimationLevel="None" Margin="0,0,0,5">
+                   
+                    <m:MapLayer x:Name="GISlayer"/>
 
                     <Label Content="currentPosition" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="currentPosition" VerticalAlignment="Top" />
 

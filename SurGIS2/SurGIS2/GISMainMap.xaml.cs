@@ -73,9 +73,9 @@ namespace SurGIS2
         private double tileOpacity = 0.50;
 
         string BingMapsKey = "AkrxDoVF81cNDLiNXWiVCzeOT3hrtspPyJUiMHxQcO0wd-tLAX7p8GCBaWPwI-PO";
+        SurfaceWindow1 surfaceWindow;
 
-
-        public GISMainMap()
+        public GISMainMap(SurfaceWindow1 ProgramWindow)
         {
           
             InitializeComponent();
@@ -94,6 +94,9 @@ namespace SurGIS2
             MapTileOverlay.ViewChangeOnFrame += new EventHandler<MapEventArgs>(viewMap_ViewChangeOnFrame);
             // The default animation level: navigate between different map locations.
             //viewMap.AnimationLevel = AnimationLevel.Full;
+
+            // surfacewindow is a global handle back to the main program.
+            surfaceWindow = ProgramWindow;
 
         }
          private void viewMap_ViewChangeOnFrame(object sender, MapEventArgs e)
@@ -192,18 +195,7 @@ namespace SurGIS2
                 SetUpNewPolygon();
             }
         }
-
-        /// <summary>
-        /// Occurs when the window is about to close. 
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            // Remove handlers for window availability events
-            RemoveWindowAvailabilityHandlers();
-        }
+     
 
         /// <summary>
         /// Adds handlers for window availability events.

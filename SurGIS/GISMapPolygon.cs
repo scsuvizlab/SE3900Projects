@@ -84,6 +84,7 @@ namespace SurGIS
         public void AddPolygon(SurfaceWindow1 mapwindow)
         {
 
+            
             MapPolygon NewPolygon = new MapPolygon();
 
             NewPolygon.Locations = new LocationCollection();           
