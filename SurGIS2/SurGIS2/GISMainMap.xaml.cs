@@ -58,7 +58,7 @@ namespace SurGIS2
         /// 
 
         // The user defined polygon to add to the map.
-        MapPolygon newPolygon = null;
+       // MapPolygon newPolygon = null;
         // The map layer containing the polygon points defined by the user.
         public MapLayer polygonPointLayer = new MapLayer();
 
@@ -82,7 +82,7 @@ namespace SurGIS2
             //Set focus on the map
             MapTileOverlay.Focus();
 
-            SetUpNewPolygon();
+          //  SetUpNewPolygon();
             // Adds location points to the polygon for every single mouse click
             MapTileOverlay.MouseDoubleClick += new MouseButtonEventHandler(
                MapWithPolygon_MouseDoubleClick);
@@ -143,20 +143,20 @@ namespace SurGIS2
         }
 
 
-        private void SetUpNewPolygon()
+        private void SetUpNewPolygon()  /// remove this method.  All polgyon stuff will be handled by the polygon class
         {
-            newPolygon = new MapPolygon();
-            // Defines the polygon fill details
-            newPolygon.Locations = new LocationCollection();
-            newPolygon.Fill = new SolidColorBrush(Colors.Blue);
-            newPolygon.Stroke = new SolidColorBrush(Colors.Green);
-            newPolygon.StrokeThickness = 3;
-            newPolygon.Opacity = 0.8;
-            //Set focus back to the map so that +/- work for zoom in/out
-            MapTileOverlay.Focus();
+            //newPolygon = new MapPolygon();
+            //// Defines the polygon fill details
+            //newPolygon.Locations = new LocationCollection();
+            //newPolygon.Fill = new SolidColorBrush(Colors.Blue);
+            //newPolygon.Stroke = new SolidColorBrush(Colors.Green);
+            //newPolygon.StrokeThickness = 3;
+            //newPolygon.Opacity = 0.8;
+            ////Set focus back to the map so that +/- work for zoom in/out
+            //MapTileOverlay.Focus();
         }
 
-        private void MapWithPolygon_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void MapWithPolygon_MouseDoubleClick(object sender, MouseButtonEventArgs e)  // remove this method, all the polygon function will go in the polygon class
         {
             //e.Handled = true;
             //// Creates a location for a single polygon point and adds it to
@@ -182,21 +182,21 @@ namespace SurGIS2
 
         }
 
-        private void btnCreatePolygon_Click(object sender, RoutedEventArgs e)
+        private void btnCreatePolygon_Click(object sender, RoutedEventArgs e)  // remove this method.  blah blah polygon class.
         {
             //If there are two or more points, add the polygon layer to the map
-            if (newPolygon.Locations.Count >= 2)
-            {
-                // Removes the polygon points layer.
-                polygonPointLayer.Children.Clear();
+            //if (newPolygon.Locations.Count >= 2)
+            //{
+            //    // Removes the polygon points layer.
+            //    polygonPointLayer.Children.Clear();
 
-                // Adds the filled polygon layer to the map.
-                NewPolygonLayer.Children.Add(newPolygon);
-                SetUpNewPolygon();
-            }
+            //    // Adds the filled polygon layer to the map.
+            //    NewPolygonLayer.Children.Add(newPolygon);
+            //    SetUpNewPolygon();
+            //}
         }
-     
-
+        // the methods in the following region are all default stubs.
+        #region DEFAULT 
         /// <summary>
         /// Adds handlers for window availability events.
         /// </summary>
@@ -250,6 +250,8 @@ namespace SurGIS2
         {
             //TODO: disable audio, animations here
         }
+
+        #endregion
 
         private void addImageToMap(object sender, RoutedEventArgs e)
         {

@@ -56,20 +56,19 @@ namespace SurGIS2
 
    public class GISMapPolygon
     {
-        public ArrayList MapPolygons = new ArrayList();
-        MapLayer PushPinLayer = new MapLayer();
-        SurfaceInkCanvas GISInkCanvas = new SurfaceInkCanvas();
-        MapLayer InkLayer = new MapLayer();
+        public ArrayList MapPolygons = new ArrayList();    // collection of WPF Polygons
         public MapPolygon SelectedPolygon = new MapPolygon();
+
+       // the naming of GMPoint is confusing.  GMPoint (singular) is of type GISMapPoints (plural)  Think of a better name.
         public GISMapPoints GMPoint;
-        public MapLayer PointLayer = new MapLayer();
+        public MapLayer PointLayer = new MapLayer();  
 
         // this is a global variable to handle the main program window.  It should make it available to all methods in this class.
         // so we don't have to go searching so hard for it or passing it around like a frisbee
 
          private SurfaceWindow1 surfacewindow;
 
-
+       // The Constructor for all classes should receive a handle to the main program window
         public GISMapPolygon(SurfaceWindow1 ProgramWindow)
         {
             surfacewindow = ProgramWindow;
@@ -147,29 +146,33 @@ namespace SurGIS2
 
         public void Polygon_TouchDown(object sender, TouchEventArgs e)
         {
-            MapPolygon TouchPolygon = sender as MapPolygon;            
+            MapPolygon TouchPolygon = sender as MapPolygon;    // The polygon that was actually touched.          
 
-            if (TouchPolygon.Equals(SelectedPolygon))
+            if (TouchPolygon.Equals(SelectedPolygon))          // if it's the same as 'selectedpolygon' then it's already selected
             {                
-                surfacewindow.MapPolygon.DeselectAll();
+                surfacewindow.MapPolygon.DeselectAll();        // deselect the polygon
             }
-            else
+            else                                                // we touched a different polygon than the one that's selected.
             {
-                //surfacewindow.MapPolygon.DeselectAll();
-                //SelectedPolygon = TouchPolygon;
+                
+                surfacewindow.MapPolygon.DeselectAll();
+                
                 UpdateColors(TouchPolygon);
 
-                if (TouchPolygon.Equals(SelectedPolygon))
-                {
+
+                //if (!TouchPolygon.Equals(SelectedPolygon))
+                //{
                     surfacewindow.MapPolygon.GMPoint.AddPolyPoint = true;
                     
-                    foreach (Location TempLocation in SelectedPolygon.Locations)
+                    foreach (Location TempLocation in TouchPolygon.Locations)
                     {
                         surfacewindow.MapPolygon.GMPoint.AddPoint(TempLocation);
                     }
 
                     surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;
-                }
+               // }
+
+                SelectedPolygon = TouchPolygon; 
             }
         }
 

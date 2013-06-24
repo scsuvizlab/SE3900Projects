@@ -65,18 +65,17 @@ namespace SurGIS2
 
     public partial class SurfaceWindow1 : SurfaceWindow
     {
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        /// 
+       
+        #region GLOBALS
+
         bool AddPolyMode = false;
        
         public GISMapPolygon MapPolygon;
         public GISMainMap MainMap;
         public SurGISContPanel1 ControlPanel;
 
+        #endregion
 
-        
         public SurfaceWindow1()
         {
             InitializeComponent();
@@ -89,21 +88,38 @@ namespace SurGIS2
            
             // adds the map to the main window
             
-            AddMap();
-          
-
+           AddMap();
+          //  MainGrid.Children.Add(MainMap);
+            
 
             // Adds the control panel to the program window
-             MainScatterView.Items.Add(ControlPanel);
-
-      
-
+         //  MainScatterView.Items.Add(ControlPanel);
+            AddControl();
+           
             MainMap.MapTileOverlay.TouchDown += new EventHandler<TouchEventArgs>(AddPoint);
 
             // Adds a polygon handler class.  This should handle all the polygon functions
             MapPolygon = new GISMapPolygon(this);
            
             
+
+        }
+        // This next region has all the methods to build needed components
+
+        #region BUILD_COMPONENTS
+
+        void AddControl()
+        {
+            ScatterViewItem ControlScatterView = new ScatterViewItem();
+            ControlScatterView.Width = 500;
+            ControlScatterView.Height = 200;
+            ControlScatterView.CanScale = false;
+            ControlScatterView.ZIndex = 2;
+            ControlScatterView.Content = ControlPanel;
+            MainScatterView.Items.Add(ControlScatterView);
+            //ControlScatterView.IsTopmostOnActivation = true;
+            //ControlScatterView.IsContainerActive = true;
+            //ControlScatterView.ContainerStaysActive = true;
 
         }
         void AddMap()
@@ -115,9 +131,11 @@ namespace SurGIS2
             MapScatterViewItem.Padding = new Thickness(20);
 
             MapScatterViewItem.Content = MainMap;
+            MapScatterViewItem.ZIndex = 1;
 
             MainScatterView.Items.Add(MapScatterViewItem);
         }
+        #endregion
 
         // All the default availability handlers.
         #region DEFAULT
@@ -224,6 +242,8 @@ namespace SurGIS2
 
         //  This toggles the polycreation mode of the map
 
+        // not sure where this method needs to go.  Is it in the main program, the map or the polygon class?
+
         public void PolyPointButton_Click()
         {
             if (AddPolyMode)
@@ -236,6 +256,7 @@ namespace SurGIS2
             }
             else
             {
+                MapPolygon.DeselectAll();   // clear out the currently selected polygons and points, if any exit.
                 ControlPanel.PolyGonToggleButton.Content = "Create";
                 AddPolyMode = true;
                 MapPolygon.GMPoint.AddPolyPoint = true;                

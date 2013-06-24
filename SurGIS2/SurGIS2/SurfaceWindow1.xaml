@@ -5,11 +5,11 @@
     Title="SurGIS2" Name="SurGISWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="273" d:DesignWidth="393" SizeToContent="WidthAndHeight">
 
     <Grid Name="MainGrid">
-        <s:ScatterView Name="MainScatterView" IsManipulationEnabled="True">
+       
+        <s:ScatterView Name="MainScatterView" IsManipulationEnabled="True" >
 
-     
 
 
-    </s:ScatterView>
+        </s:ScatterView>
     </Grid>
 </s:SurfaceWindow>
