@@ -76,7 +76,7 @@
     <Compile Include="SurGISContPanel1.xaml.cs">
       <DependentUpon>SurGISContPanel1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SURGisPolygonHandler.cs" />
+    <Compile Include="GISPolygonHandler.cs" />
     <Page Include="GISMainMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

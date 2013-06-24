@@ -140,37 +140,35 @@ namespace SurGIS2
             NewPolygon.Name = "MapPoly" + MapPolygons.Count.ToString();
             NewPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);                          
             
-            GMPoint.MapPoints = new ArrayList();
+            surfacewindow.MapPolygon.GMPoint.MapPoints = new ArrayList();
             surfacewindow.MainMap.PointLayer.Children.Clear();
 
         }
 
         public void Polygon_TouchDown(object sender, TouchEventArgs e)
         {
-            MapPolygon TouchPolygon = sender as MapPolygon;
+            MapPolygon TouchPolygon = sender as MapPolygon;            
 
             if (TouchPolygon.Equals(SelectedPolygon))
-            {
-                DeselectAll();
+            {                
+                surfacewindow.MapPolygon.DeselectAll();
             }
             else
             {
-                SelectedPolygon = TouchPolygon;
+                //surfacewindow.MapPolygon.DeselectAll();
+                //SelectedPolygon = TouchPolygon;
                 UpdateColors(TouchPolygon);
 
-                //if (TouchPolygon.Equals(SelectedPolygon))
-                //{
-                //    foreach (Location TempLocation in SelectedPolygon.Locations)
-                //    {
-                //        GMPoint.AddPoint(TempLocation);
-                //    }
-                //}
-
-                int pointCounter = 1;
-
-                foreach (Location p in TouchPolygon.Locations)
+                if (TouchPolygon.Equals(SelectedPolygon))
                 {
-                    pointCounter++;
+                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = true;
+                    
+                    foreach (Location TempLocation in SelectedPolygon.Locations)
+                    {
+                        surfacewindow.MapPolygon.GMPoint.AddPoint(TempLocation);
+                    }
+
+                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;
                 }
             }
         }
@@ -194,17 +192,19 @@ namespace SurGIS2
                 }
             }
         }
-        private void DeselectAll()
+        public void DeselectAll()
         {
-            this.SelectedPolygon = new MapPolygon();
-            this.SelectedPolygon = null;
+            surfacewindow.MapPolygon.SelectedPolygon = new MapPolygon();
+            surfacewindow.MapPolygon.SelectedPolygon = null;
             MapPolygon Dummy = new MapPolygon();
             UpdateColors(Dummy);
+            surfacewindow.MapPolygon.GMPoint.MapPoints = new ArrayList(); 
+            surfacewindow.MainMap.PointLayer.Children.Clear();                       
         }
 
         public void ClearMapPolies()
         {
-            MapPolygons.Clear();
+            surfacewindow.MainMap.GISlayer.Children.Clear();
             MapPolygon Dummy = new MapPolygon();
             SelectedPolygon = null;
         }

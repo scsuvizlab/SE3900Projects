@@ -214,6 +214,7 @@ namespace SurGIS2
                 MapPolygon.AddPolygon();
                 AddPolyMode = false;
                 MapPolygon.GMPoint.AddPolyPoint = false;
+                MapPolygon.DeselectAll();
             }
             else
             {
