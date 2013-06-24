@@ -36,9 +36,15 @@ namespace SurGIS
         SurfaceInkCanvas GISInkCanvas = new SurfaceInkCanvas();       
         MapLayer InkLayer = new MapLayer();
         public MapPolygon SelectedPolygon = new MapPolygon();
-        public GISMapPoints GMPoint = new GISMapPoints();      
+        public GISMapPoints GMPoint = new GISMapPoints();
+        public SurfaceWindow1 mapwindow;
 
         // This is for creating polygons from touches on the map
+
+        public GISMapPolygon(SurfaceWindow1 surwin){
+
+            mapwindow = surwin;
+        }
 
         public void ConvertPointLocations(MapPolygon NewPolygon, ArrayList GMPointLocations)
         {
@@ -100,7 +106,7 @@ namespace SurGIS
             
             MapPolygons.Add(NewPolygon);
             NewPolygon.Name = "MapPoly" + MapPolygons.Count.ToString();
-           // NewPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);            
+            NewPolygon.TouchDown += new EventHandler<TouchEventArgs>(Polygon_TouchDown);            
             /*
              * this is where we are trying to make it so that we can pass in SurfaceWindow1 so that we can make the selected Polygon show the points it is made from. 
              * right now the polygon is drawn from plotted points, then the points are erased, since they no longer have a purpose to be there.
@@ -112,7 +118,7 @@ namespace SurGIS
             
         }        
     
-        public void Polygon_TouchDown(SurfaceWindow1 mapwindow, object sender, TouchEventArgs e)
+        public void Polygon_TouchDown(object sender, TouchEventArgs e)
         {
             MapPolygon TouchPolygon = sender as MapPolygon;            
             

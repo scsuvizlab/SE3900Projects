@@ -39,7 +39,7 @@ namespace SurGIS
         /// </summary>
         ///        
 
-        GISMapPolygon GMPolygon = new GISMapPolygon();
+        GISMapPolygon GMPolygon;
         SurXML_IO XML_IO = new SurXML_IO();
         //GISMapPoints GMPoint = new GISMapPoints();
         //GMP.Parent = this;
@@ -89,8 +89,8 @@ namespace SurGIS
                 MessageBoxResult result = MessageBox.Show("InitError", i.Message);
             }
             // Add handlers for window availability events
-            
 
+            GMPolygon = new GISMapPolygon(this);
 
             MyMapMode = "ArialWithLabels";
             myMap.Children.Add(PushPinLayer);   // add the polygon layer to the map
