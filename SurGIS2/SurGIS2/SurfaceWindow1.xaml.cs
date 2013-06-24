@@ -88,9 +88,16 @@ namespace SurGIS2
 
            
             // adds the map to the main window
-         
-            MainGrid.Children.Add(MainMap);
-            MainScatterView.Items.Add(ControlPanel);
+            
+            AddMap();
+          
+
+
+            // Adds the control panel to the program window
+             MainScatterView.Items.Add(ControlPanel);
+
+      
+
             MainMap.MapTileOverlay.TouchDown += new EventHandler<TouchEventArgs>(AddPoint);
 
             // Adds a polygon handler class.  This should handle all the polygon functions
@@ -98,6 +105,18 @@ namespace SurGIS2
            
             
 
+        }
+        void AddMap()
+        {
+            // build a scatterviewitem to put the map in.
+            ScatterViewItem MapScatterViewItem = new ScatterViewItem();
+            MapScatterViewItem.Width = 900;
+            MapScatterViewItem.Height = 600;
+            MapScatterViewItem.Padding = new Thickness(20);
+
+            MapScatterViewItem.Content = MainMap;
+
+            MainScatterView.Items.Add(MapScatterViewItem);
         }
 
         // All the default availability handlers.
@@ -214,7 +233,6 @@ namespace SurGIS2
                 MapPolygon.AddPolygon();
                 AddPolyMode = false;
                 MapPolygon.GMPoint.AddPolyPoint = false;
-                MapPolygon.DeselectAll();
             }
             else
             {

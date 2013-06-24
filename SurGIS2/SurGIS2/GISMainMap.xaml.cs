@@ -60,7 +60,7 @@ namespace SurGIS2
         // The user defined polygon to add to the map.
         MapPolygon newPolygon = null;
         // The map layer containing the polygon points defined by the user.
-        MapLayer polygonPointLayer = new MapLayer();
+        public MapLayer polygonPointLayer = new MapLayer();
 
         // A collection of key/value pairs containing the event name 
         // and the text block to display the event to.
