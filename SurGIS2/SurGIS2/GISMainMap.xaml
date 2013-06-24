@@ -23,11 +23,16 @@
             <Setter Property="Padding" Value="10px 0 0 0"/>
             <Setter Property="Margin" Value="0 0 0 0"  />
         </Style>
+
     </UserControl.Resources>
     
     
     <!--<s:ScatterView >
         <s:ScatterViewItem Width="700" Height="500" Padding="25">-->
+
+    <s:ScatterView >
+        <s:ScatterViewItem Width="700" Height="500" Padding="25">
+
 
             <Grid x:Name="LayoutRoot" Background="White" >
                 <Grid.ColumnDefinitions>
@@ -191,6 +196,6 @@
 
 
             </Grid>
-        <!--</s:ScatterViewItem>
-    </s:ScatterView>-->
+        </s:ScatterViewItem>
+    </s:ScatterView>
 </UserControl>
