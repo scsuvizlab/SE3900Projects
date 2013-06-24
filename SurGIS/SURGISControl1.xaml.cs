@@ -32,16 +32,19 @@ namespace SurGIS
        public Double CameraLevel;
        public double Orientation;
        private SurfaceWindow1 surfaceWindow1;
+     
 
        public ArrayList Polygons = new ArrayList();
-   
 
-        public SURGISControl1()
-        {
-            InitializeComponent();
-            
-            //SURTextBox.Text = this.Name;
-        }
+
+
+
+       public SURGISControl1()
+       {
+           InitializeComponent();
+
+           //SURTextBox.Text = this.Name;
+       }
 
         public SURGISControl1(SurfaceWindow1 surfaceWindow1)
         {
@@ -63,7 +66,6 @@ namespace SurGIS
 
             {
 
-                //surfaceWindow1.AddPolygon(Polygon);
                 Polygon.Fill = new SolidColorBrush(Colors.Maroon);
                 Polygon.Stroke = new SolidColorBrush(Colors.Gold);
                 Polygon.StrokeThickness = 2;
@@ -71,8 +73,14 @@ namespace SurGIS
 
                     try
                     {
-                        surfaceWindow1.PolygonLayer.Children.Add(Polygon);
-                        //surfaceWindow1.Polygons.Add(Polygons);
+                        //Original =====
+                        //LogicalTreeHelper.GetChildren);
+                        MessageBox.Show ("Message here");
+                        surfaceWindow1.PolygonLayer.Children.Add(Polygon); //The actual polygon creation point.
+                        //==============
+     
+
+                       
                     }
                     catch
                     {

@@ -686,6 +686,7 @@ namespace SurGIS
             } 
         }
 
+
        private void PolyCreateButton_Click(object sender, RoutedEventArgs e)
         {
             GMPolygon.AddPolygon(this);
