@@ -26,8 +26,8 @@
     </UserControl.Resources>
     
     
-    <s:ScatterView >
-        <s:ScatterViewItem Width="700" Height="500" Padding="25">
+    <!--<s:ScatterView >
+        <s:ScatterViewItem Width="700" Height="500" Padding="25">-->
 
             <Grid x:Name="LayoutRoot" Background="White" >
                 <Grid.ColumnDefinitions>
@@ -74,11 +74,7 @@
                                 </s:SurfaceButton>
                             </StackPanel>
                         </s:ScatterViewItem>
-                    </s:ScatterView>
-
-
-
-                    <s:ScatterView >
+               
                         <s:ScatterViewItem MinWidth="400" MaxHeight="600" Padding="10">
                             <s:SurfaceListBox Padding="10" HorizontalContentAlignment="Center">
                                 <!--<StackPanel Orientation="Horizontal" Opacity="0.7"  HorizontalAlignment="Center">-->
@@ -108,10 +104,7 @@
                                 <!--</StackPanel>-->
                             </s:SurfaceListBox>
                         </s:ScatterViewItem>
-                    </s:ScatterView>
-
-
-                    <s:ScatterView >
+                 
                         <s:ScatterViewItem MinWidth="800" MaxHeight="600">
                             <StackPanel Orientation="Horizontal" Opacity="0.7"  HorizontalAlignment="Center">
                                 <Label Style="{StaticResource RedLabel}" Canvas.Top="0" >Search and Map Entities Near a Location</Label>
@@ -198,6 +191,6 @@
 
 
             </Grid>
-        </s:ScatterViewItem>
-    </s:ScatterView>
+        <!--</s:ScatterViewItem>
+    </s:ScatterView>-->
 </UserControl>
