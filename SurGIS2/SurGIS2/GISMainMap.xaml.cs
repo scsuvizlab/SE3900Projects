@@ -60,7 +60,7 @@ namespace SurGIS2
         // The user defined polygon to add to the map.
        // MapPolygon newPolygon = null;
         // The map layer containing the polygon points defined by the user.
-        public MapLayer polygonPointLayer = new MapLayer();
+       // public MapLayer polygonPointLayer = new MapLayer();
 
         // A collection of key/value pairs containing the event name 
         // and the text block to display the event to.
@@ -88,7 +88,7 @@ namespace SurGIS2
                MapWithPolygon_MouseDoubleClick);
 
             // Adds the layer that contains the polygon points
-            NewPolygonLayer.Children.Add(polygonPointLayer);
+           // NewPolygonLayer.Children.Add(polygonPointLayer);
 
             // Displays the current latitude and longitude as the map animates.
             MapTileOverlay.ViewChangeOnFrame += new EventHandler<MapEventArgs>(viewMap_ViewChangeOnFrame);
