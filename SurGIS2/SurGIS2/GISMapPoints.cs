@@ -42,7 +42,7 @@ namespace SurGIS2
             pointrect.Stroke = new SolidColorBrush(Colors.Gold);
             pointrect.StrokeThickness = 1;
             pointrect.Width = 8;
-            pointrect.Height = 8;
+            pointrect.Height = 8;            
         }
 
 
@@ -76,39 +76,51 @@ namespace SurGIS2
                 GMPoint.PointLocation = MapPointLocation;                
                 surfacewindow.MainMap.PointLayer.AddChild(GMPoint.pointrect, MapPointLocation);
                 MapPoints.Add(GMPoint);
-                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);                
+                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);
+                
 
             }
 
         }
 
-        public void Point_TouchMove(Location MapLocation)
-        {
-            //Rectangle TouchPoint = sender as Rectangle;
-            surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);
-            surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;
-            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);
-            PointSelected = false;
-            //TouchPoint = null;            
-        }
+       /*
+        * trying to get a point to move by useing two different methods. one is an actualy event methods and one is a mehtods that says
+        * touch a point and change point to recently touched point.
+        */
+
+        //public void Point_TouchMove(Location MapLocation)
+        //{
+        //    //Rectangle TouchPoint = sender as Rectangle;
+        //    surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);
+        //    surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;
+        //    surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);
+        //    PointSelected = false;
+        //    //surfacewindow.MainMap.TouchDown += surfacewindow.AddPoint;
+        //    //TouchPoint = null;            
+        //}
+
+        //public void Point_TouchMove(object sender, TouchEventArgs e)
+        //{            
+        //    Rectangle TouchPoint = sender as Rectangle;
+
+        //        surfacewindow.MapPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;                                
+            
+        //}
 
         public void Point_TouchDown(object sender, TouchEventArgs e)
         {
             Rectangle TouchPoint = sender as Rectangle;
-            
+
             if (TouchPoint == SelectedPoint.pointrect)
             {
                 DeselectAll();
             }
             else
-            {                
+            {
                 SelectedPoint = new GISMapPoint();
                 SelectedPoint.pointrect = TouchPoint;
-                UpdateColors(TouchPoint);                           
+                UpdateColors(TouchPoint);
             }
-
-            //surfacewindow.MainMap.TouchDown -= new ;
-            PointSelected = true;     
         }
 
         public void UpdateColors(Rectangle pointrect)

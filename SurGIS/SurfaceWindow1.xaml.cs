@@ -691,7 +691,7 @@ namespace SurGIS
         {
             GMPolygon.AddPolygon(this);
             GMPolygon.GMPoint.AddPolyPoint = false;
-            myMap.Children.Remove(PolyPointLayer);
+           // myMap.Children.Remove(PolyPointLayer);
             PolyPointButton.Content = "Polygon";
             PolyCreateButton.Content = "";
         } 

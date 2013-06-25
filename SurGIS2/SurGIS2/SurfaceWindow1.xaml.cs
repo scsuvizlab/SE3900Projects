@@ -211,33 +211,31 @@ namespace SurGIS2
         // All the polygon stuff goes in this region.
         #region PolygonStuff  
 
-        private void AddPoint(object sender, TouchEventArgs e)
+        public void AddPoint(object sender, TouchEventArgs e)
         {
             Location PointLocation = new Location();
             TouchPoint TouchP = e.GetTouchPoint(MainMap.MapTileOverlay);
             Point TPosition = TouchP.Position;
             Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);
             MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);
-            if (MapPolygon.GMPoint.PointSelected)
+
+            /*
+             * trying to get point to move. with if statement in place it nudges the point. other lines above if do absolutely nothing 
+             * was trying to get event method to work with those two lines.
+             */
+
+            //MapPolygon.GMPoint.SelectedPoint.Equals(null);
+
+           // MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
+
+            //if (MapPolygon.GMPoint.PointSelected)
             {
-                MapPolygon.GMPoint.AddPolyPoint = true;  
-                MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
-                MapPolygon.GMPoint.AddPolyPoint = false;  
-                //MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
+               // MapPolygon.GMPoint.AddPolyPoint = true;  
+               // MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
+               // MapPolygon.GMPoint.AddPolyPoint = false;  
+                
             }
         }
-
-        //public void Point_TouchMove(object sender, TouchEventArgs e)
-        //{
-        //    Rectangle TouchPoint = sender as Rectangle;
-
-
-        //    //GMPolygon.GMPoint.SelectedPoint.pointrect = new Rectangle();
-        //    MapPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;
-        //    //TouchPoint = null;
-
-
-        //}
 
         //  This toggles the polycreation mode of the map
 
