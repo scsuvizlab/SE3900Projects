@@ -54,6 +54,7 @@ namespace SurGIS2
         public ArrayList MapPoints = new ArrayList();
         public bool AddPolyPoint = false;
         public GISMapPoint SelectedPoint = new GISMapPoint();
+        public bool PointSelected = false; 
 
         // Global handler back to the main program window.
         private SurfaceWindow1 surfacewindow;
@@ -66,48 +67,48 @@ namespace SurGIS2
             // TODO: Complete member initialization
             surfacewindow = ProgramWindow;
         }
-       
-
-        /*
-         * This is where we tried to create a new AddPoint Method that has only one purpose, which is to redraw the points on a SelectedPolygon. right now the method is Empty 
-         * since we have not yet been able to pass in the SurfaceWindow1 into the Polygon_TouchDown Method.
-         */
-
-        //used for showing points when a polygon is selected.
-      
-
         //used for plotting the points for drawing a polygon.
         public void AddPoint(Location MapPointLocation)
         {
             if (AddPolyPoint)
             {
                 GISMapPoint GMPoint = new GISMapPoint();
-                GMPoint.PointLocation = MapPointLocation;
+                GMPoint.PointLocation = MapPointLocation;                
                 surfacewindow.MainMap.PointLayer.AddChild(GMPoint.pointrect, MapPointLocation);
                 MapPoints.Add(GMPoint);
-                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);
+                GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);                
 
             }
 
-            //if (SelectedPoint != null)
-            //{
-            //   surfacewindow.MapPolygon.FindPoint(SelectedPoint);
-            //}
+        }
+
+        public void Point_TouchMove(Location MapLocation)
+        {
+            //Rectangle TouchPoint = sender as Rectangle;
+            surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);
+            surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;
+            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);
+            PointSelected = false;
+            //TouchPoint = null;            
         }
 
         public void Point_TouchDown(object sender, TouchEventArgs e)
         {
             Rectangle TouchPoint = sender as Rectangle;
-
-            if (TouchPoint.Equals(SelectedPoint.pointrect))
+            
+            if (TouchPoint == SelectedPoint.pointrect)
             {
                 DeselectAll();
             }
             else
-            {
+            {                
+                SelectedPoint = new GISMapPoint();
                 SelectedPoint.pointrect = TouchPoint;
-                UpdateColors(TouchPoint);
+                UpdateColors(TouchPoint);                           
             }
+
+            //surfacewindow.MainMap.TouchDown -= new ;
+            PointSelected = true;     
         }
 
         public void UpdateColors(Rectangle pointrect)
@@ -132,7 +133,7 @@ namespace SurGIS2
         {
             SelectedPoint = new GISMapPoint();
             GISMapPoint Dummy = new GISMapPoint();
-            UpdateColors(Dummy.pointrect);
+            UpdateColors(Dummy.pointrect);            
         }
 
     }

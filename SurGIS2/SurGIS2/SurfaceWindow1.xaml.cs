@@ -213,32 +213,31 @@ namespace SurGIS2
 
         private void AddPoint(object sender, TouchEventArgs e)
         {
-
-
             Location PointLocation = new Location();
             TouchPoint TouchP = e.GetTouchPoint(MainMap.MapTileOverlay);
             Point TPosition = TouchP.Position;
             Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);
             MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);
-
-            if (!MapPolygon.GMPoint.AddPolyPoint)
+            if (MapPolygon.GMPoint.PointSelected)
             {
-                MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(Point_TouchMove);
+                MapPolygon.GMPoint.AddPolyPoint = true;  
+                MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
+                MapPolygon.GMPoint.AddPolyPoint = false;  
+                //MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
             }
-
         }
 
-        public void Point_TouchMove(object sender, TouchEventArgs e)
-        {
-            Rectangle TouchPoint = sender as Rectangle;
+        //public void Point_TouchMove(object sender, TouchEventArgs e)
+        //{
+        //    Rectangle TouchPoint = sender as Rectangle;
 
 
-            //GMPolygon.GMPoint.SelectedPoint.pointrect = new Rectangle();
-            MapPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;
-            //TouchPoint = null;
+        //    //GMPolygon.GMPoint.SelectedPoint.pointrect = new Rectangle();
+        //    MapPolygon.GMPoint.SelectedPoint.pointrect = TouchPoint;
+        //    //TouchPoint = null;
 
 
-        }
+        //}
 
         //  This toggles the polycreation mode of the map
 
@@ -260,7 +259,6 @@ namespace SurGIS2
                 ControlPanel.PolyGonToggleButton.Content = "Create";
                 AddPolyMode = true;
                 MapPolygon.GMPoint.AddPolyPoint = true;                
-
             }
 
         }

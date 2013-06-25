@@ -152,16 +152,15 @@ namespace SurGIS2
             {                
                 surfacewindow.MapPolygon.DeselectAll();        // deselect the polygon
             }
-            else                                                // we touched a different polygon than the one that's selected.
+            else
             {
-                
+                //SelectedPolygon.Equals(TouchPolygon);
+   
                 surfacewindow.MapPolygon.DeselectAll();
                 
                 UpdateColors(TouchPolygon);
 
-
-                //if (!TouchPolygon.Equals(SelectedPolygon))
-                //{
+                                
                     surfacewindow.MapPolygon.GMPoint.AddPolyPoint = true;
                     
                     foreach (Location TempLocation in TouchPolygon.Locations)
@@ -169,8 +168,7 @@ namespace SurGIS2
                         surfacewindow.MapPolygon.GMPoint.AddPoint(TempLocation);
                     }
 
-                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;
-               // }
+                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;                
 
                 SelectedPolygon = TouchPolygon; 
             }
