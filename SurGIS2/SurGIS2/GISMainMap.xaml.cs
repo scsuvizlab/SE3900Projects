@@ -593,6 +593,8 @@ namespace SurGIS2
                     AddPushpinToMap(Convert.ToDouble(latitudeList[i].InnerText), Convert.ToDouble(longitudeList[i].InnerText), Convert.ToString(i + 1));
                 }
                 SearchResults.Visibility = Visibility.Visible;
+                
+
                 ///// myMap.Visibility = Visibility.Visible;
                 /////myMapLabel.Visibility = Visibility.Visible;
                 /////myMap.Focus(); //allows '+' and '-' to zoom the map
@@ -601,7 +603,7 @@ namespace SurGIS2
         }
 
         //Search for POI elements when the Search button is clicked
-        private void Search_Click(object sender, RoutedEventArgs e)
+        public void Search_Click(object sender, RoutedEventArgs e)
         {
             //Clear prior search
             //// myMap.Visibility = Visibility.Hidden;

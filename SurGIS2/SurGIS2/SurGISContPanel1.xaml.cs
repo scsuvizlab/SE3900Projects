@@ -104,6 +104,7 @@ namespace SurGIS2
 
         private void btnRemoveCities_Click(object sender, RoutedEventArgs e)
         {
+           // surfacewindow.MainMap;
 
 
 
@@ -111,17 +112,19 @@ namespace SurGIS2
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
+
+            surfacewindow.MainMap.Search_Click(sender, e);
             //Clear prior search
-            //// myMap.Visibility = Visibility.Hidden;
-            ////myMapLabel.Visibility = Visibility.Collapsed;
-            //// myMap.Children.Clear();
-           // SearchResults.Visibility = Visibility.Collapsed;
-           // AddressList.Children.Clear();
-           // ErrorMessage.Visibility = Visibility.Collapsed;
+            //surfacewindow.MainMap.Visibility = Visibility.Hidden;
+           // surfacewindow.MainMap.myMapLabel.Visibility = Visibility.Collapsed;
+           // surfacewindow.MainMap.AddressList.Children.Clear();
+           //// SearchResults.Visibility = Visibility.Collapsed;
+           //// AddressList.Children.Clear();
+           //// ErrorMessage.Visibility = Visibility.Collapsed;
 
 
-            //Get latitude and longitude coordinates for specified location
-            //////// XmlDocument searchResponse = Geocode(SearchNearby.Text);
+           // //Get latitude and longitude coordinates for specified location
+           // XmlDocument searchResponse = Geocode(SearchNearby.Text);
 
             //Find and display points of interest near the specified location
             //// FindandDisplayNearbyPOI(searchResponse);
