@@ -218,6 +218,7 @@ namespace SurGIS2
             Point TPosition = TouchP.Position;
             Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);
             MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);
+            
 
             /*
              * trying to get point to move. with if statement in place it nudges the point. other lines above if do absolutely nothing 
@@ -229,11 +230,11 @@ namespace SurGIS2
             //MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
 
             if (MapPolygon.GMPoint.PointSelected)
-            {
-                MapPolygon.GMPoint.SelectedPoint.pointrect.TouchDown -= EventHandler.Remove(MapPolygon.GMPoint.Point_TouchDown,);
+            {                
+                MapPolygon.GMPoint.SelectedPoint.pointrect.TouchDown -= new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchDown);                
                 MapPolygon.GMPoint.AddPolyPoint = true;
                 MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
-                MapPolygon.GMPoint.AddPolyPoint = false;                
+                MapPolygon.GMPoint.AddPolyPoint = false;               
             }
         }
 

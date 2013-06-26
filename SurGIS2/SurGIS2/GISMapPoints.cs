@@ -41,8 +41,8 @@ namespace SurGIS2
             pointrect.Fill = new SolidColorBrush(Colors.Maroon);
             pointrect.Stroke = new SolidColorBrush(Colors.Gold);
             pointrect.StrokeThickness = 1;
-            pointrect.Width = 8;
-            pointrect.Height = 8;            
+            pointrect.Width = 16;
+            pointrect.Height = 16;            
         }
 
 
@@ -73,12 +73,11 @@ namespace SurGIS2
             if (AddPolyPoint)
             {
                 GISMapPoint GMPoint = new GISMapPoint();
-                GMPoint.PointLocation = MapPointLocation;                
+                GMPoint.PointLocation = MapPointLocation;
                 surfacewindow.MainMap.PointLayer.AddChild(GMPoint.pointrect, MapPointLocation);
                 MapPoints.Add(GMPoint);
                 GMPoint.pointrect.TouchDown += new EventHandler<TouchEventArgs>(Point_TouchDown);                
             }
-
         }
 
        /*
@@ -87,25 +86,12 @@ namespace SurGIS2
         */
 
         public void Point_TouchMove(Location MapLocation)
-        {
-            //Rectangle TouchPoint = sender as Rectangle;
+        {            
             surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);
             surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;
-            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);
-
-            //surfacewindow.MainMap.TouchDown += surfacewindow.AddPoint;
-            PointSelected = false;
-
-            //TouchPoint = null;            
+            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);            
+            PointSelected = false;           
         }
-
-        //public void Point_TouchMove(object sender, TouchEventArgs e)
-        //{
-        //    Rectangle TouchPoint = sender as Rectangle;
-
-        //    SelectedPoint.pointrect = TouchPoint;
-
-        //}
 
         public void Point_TouchDown(object sender, TouchEventArgs e)
         {
@@ -113,13 +99,13 @@ namespace SurGIS2
 
             if (TouchPoint == SelectedPoint.pointrect)
             {
-                DeselectAll();
+                DeselectAll();                
             }
             else
             {                
                 SelectedPoint.pointrect = TouchPoint;
-                UpdateColors(TouchPoint);                
-                PointSelected = true;               
+                UpdateColors(TouchPoint);
+                PointSelected = true;
             }            
         }
 
@@ -132,12 +118,12 @@ namespace SurGIS2
                 if (pointrect.Equals(test.pointrect) && pointrect != null)
                 {
                     test.pointrect.Stroke = new SolidColorBrush(Colors.Wheat);
-                    test.pointrect.Fill = new SolidColorBrush(Colors.Blue);
+                    test.pointrect.Fill = new SolidColorBrush(Colors.Blue);                    
                 }
                 else // not the selected polygon... reset it's color
                 {
                     test.pointrect.Stroke = new SolidColorBrush(Colors.Gold);
-                    test.pointrect.Fill = new SolidColorBrush(Colors.Maroon);
+                    test.pointrect.Fill = new SolidColorBrush(Colors.Maroon);                    
                 }
             }
         }
