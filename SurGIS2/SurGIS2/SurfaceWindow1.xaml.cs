@@ -226,14 +226,14 @@ namespace SurGIS2
 
             //MapPolygon.GMPoint.SelectedPoint.Equals(null);
 
-           // MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
+            //MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
 
-            //if (MapPolygon.GMPoint.PointSelected)
+            if (MapPolygon.GMPoint.PointSelected)
             {
-               // MapPolygon.GMPoint.AddPolyPoint = true;  
-               // MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
-               // MapPolygon.GMPoint.AddPolyPoint = false;  
-                
+                MapPolygon.GMPoint.SelectedPoint.pointrect.TouchDown -= EventHandler.Remove(MapPolygon.GMPoint.Point_TouchDown,);
+                MapPolygon.GMPoint.AddPolyPoint = true;
+                MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
+                MapPolygon.GMPoint.AddPolyPoint = false;                
             }
         }
 
