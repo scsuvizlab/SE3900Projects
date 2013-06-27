@@ -89,14 +89,10 @@ namespace SurGIS2
             // adds the map to the main window
             
            AddMap();
-          //  MainGrid.Children.Add(MainMap);
-            
-
-            // Adds the control panel to the program window
-         //  MainScatterView.Items.Add(ControlPanel);
+        
             AddControl();
            
-            MainMap.MapTileOverlay.TouchDown += new EventHandler<TouchEventArgs>(AddPoint);
+            MainMap.MapTileOverlay.TouchDown += new EventHandler<TouchEventArgs>(Map_Touch_Event);
 
             // Adds a polygon handler class.  This should handle all the polygon functions
             MapPolygon = new GISMapPolygon(this);
@@ -211,13 +207,13 @@ namespace SurGIS2
         // All the polygon stuff goes in this region.
         #region PolygonStuff  
 
-        public void AddPoint(object sender, TouchEventArgs e)
+        public void Map_Touch_Event(object sender, TouchEventArgs e)
         {
-            Location PointLocation = new Location();
-            TouchPoint TouchP = e.GetTouchPoint(MainMap.MapTileOverlay);
-            Point TPosition = TouchP.Position;
-            Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);
-            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);
+            Location PointLocation = new Location();                                                        // variable for the new touch point location in map coords
+            TouchPoint TouchP = e.GetTouchPoint(MainMap.MapTileOverlay);                                    // get the touch point in UI pixels
+            Point TPosition = TouchP.Position;                                                              // need a point object to do the conversion
+            Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);   // convert the point to a map coord location
+            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);                                              // add the point to the map.
             
 
             /*
@@ -225,11 +221,7 @@ namespace SurGIS2
              * was trying to get event method to work with those two lines.
              */
 
-            //MapPolygon.GMPoint.SelectedPoint.Equals(null);
-
-            //MapPolygon.GMPoint.SelectedPoint.pointrect.TouchMove += new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchMove);
-
-            if (MapPolygon.GMPoint.PointSelected)
+            if (MapPolygon.GMPoint.PointSelected)    // if there is a point selected
             {                
                 MapPolygon.GMPoint.SelectedPoint.pointrect.TouchDown -= new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchDown);                
                 MapPolygon.GMPoint.AddPolyPoint = true;
@@ -239,23 +231,22 @@ namespace SurGIS2
         }
 
         //  This toggles the polycreation mode of the map
-
         // not sure where this method needs to go.  Is it in the main program, the map or the polygon class?
 
         public void PolyPointButton_Click()
         {
-            if (AddPolyMode)
+            if (AddPolyMode)   // if we are drawing adding points when this button is clicked... finish drawing
             {
-                ControlPanel.PolyGonToggleButton.Content = "Add Poly";
-                // .Content = "Add Poly";
-                MapPolygon.AddPolygon();
-                AddPolyMode = false;
+                ControlPanel.PolyGonToggleButton.Content = "Add Poly";   // change the label back
+                
+                MapPolygon.AddPolygon();   // create the polygon
+                AddPolyMode = false;   
                 MapPolygon.GMPoint.AddPolyPoint = false;
             }
-            else
+            else   // if we're not currently drawing a polygon... start drawing.
             {
                 MapPolygon.DeselectAll();   // clear out the currently selected polygons and points, if any exit.
-                ControlPanel.PolyGonToggleButton.Content = "Create";
+                ControlPanel.PolyGonToggleButton.Content = "Create";   // change the button label.
                 AddPolyMode = true;
                 MapPolygon.GMPoint.AddPolyPoint = true;                
             }

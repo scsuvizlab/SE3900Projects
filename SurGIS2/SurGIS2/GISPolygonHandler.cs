@@ -156,21 +156,21 @@ namespace SurGIS2
             {
                 //SelectedPolygon.Equals(TouchPolygon);
    
-                surfacewindow.MapPolygon.DeselectAll();
+                surfacewindow.MapPolygon.DeselectAll();        // clear out the selection
                 
-                UpdateColors(TouchPolygon);
+                UpdateColors(TouchPolygon);                    // color the new polygon
 
                                 
-                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = true;
+                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = true;    // set the draw point mode to true
                     
-                    foreach (Location TempLocation in TouchPolygon.Locations)
+                    foreach (Location TempLocation in TouchPolygon.Locations)  // step through the points in the selected polygon
                     {
-                        surfacewindow.MapPolygon.GMPoint.AddPoint(TempLocation);
+                        surfacewindow.MapPolygon.GMPoint.AddPoint(TempLocation);  // draw the point from the polygon on the map
                     }
 
-                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;                
+                    surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;       // turn off the point drawing.         
 
-                SelectedPolygon = TouchPolygon; 
+                SelectedPolygon = TouchPolygon;   // make the new polygon the selected polygon.
             }
         }
 
@@ -203,7 +203,7 @@ namespace SurGIS2
             surfacewindow.MainMap.PointLayer.Children.Clear();                       
         }
 
-        public void ClearMapPolies()
+        public void ClearMapPolies()    // deletes all polygons from the map
         {
             surfacewindow.MainMap.GISlayer.Children.Clear();
             MapPolygon Dummy = new MapPolygon();
