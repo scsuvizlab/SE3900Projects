@@ -213,20 +213,28 @@ namespace SurGIS2
             TouchPoint TouchP = e.GetTouchPoint(MainMap.MapTileOverlay);                                    // get the touch point in UI pixels
             Point TPosition = TouchP.Position;                                                              // need a point object to do the conversion
             Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);   // convert the point to a map coord location
-            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);                                              // add the point to the map.
+            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);                                              // add the point to the map.            
             
+                if (MapPolygon.GMPoint.PointSelected)    // if there is a point selected
+                {     
+                    switch (MapPolygon.GMPoint.TouchCounter){
 
-            /*
-             * trying to get point to move. with if statement in place it nudges the point. other lines above if do absolutely nothing 
-             * was trying to get event method to work with those two lines.
-             */
-
-            if (MapPolygon.GMPoint.PointSelected)    // if there is a point selected
-            {                
-                MapPolygon.GMPoint.SelectedPoint.pointrect.TouchDown -= new EventHandler<TouchEventArgs>(MapPolygon.GMPoint.Point_TouchDown);                
-                MapPolygon.GMPoint.AddPolyPoint = true;
-                MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
-                MapPolygon.GMPoint.AddPolyPoint = false;               
+                        case 0:  
+                        {
+                            MapPolygon.GMPoint.TouchCounter++;  
+                            break; // do nothing till next time through
+                        }
+                        case 1:
+                        {
+                            // move the actual point.  It should take two touches to get to this point
+                            MapPolygon.GMPoint.AddPolyPoint = true; 
+                            MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
+                            MapPolygon.GMPoint.AddPolyPoint = false;
+                            MapPolygon.GMPoint.TouchCounter = 0;
+                            break;
+                        }
+                }
+                                             
             }
         }
 

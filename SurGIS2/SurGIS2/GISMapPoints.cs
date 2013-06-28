@@ -54,7 +54,9 @@ namespace SurGIS2
         public ArrayList MapPoints = new ArrayList();
         public bool AddPolyPoint = false;
         public GISMapPoint SelectedPoint = new GISMapPoint();
-        public bool PointSelected = false; 
+        public bool PointSelected = false;
+        public int TouchCounter = 0;
+        public bool SynchedPoint = false;
 
         // Global handler back to the main program window.
         private SurfaceWindow1 surfacewindow;
@@ -80,23 +82,51 @@ namespace SurGIS2
             }
         }
 
-       /*
-        * trying to get a point to move by useing two different methods. one is an actualy event methods and one is a mehtods that says
-        * touch a point and change point to recently touched point.
-        */
+        public void SynchPoint(GISMapPoint NewPoint)
+        {
+
+            int PointIndex = 0;
+            GISMapPoint TempPoint = new GISMapPoint();
+
+            if(SynchedPoint)
+            {               
+                    for (PointIndex = 0; PointIndex <= MapPoints.Count; PointIndex++)
+                    {
+
+                        TempPoint = (GISMapPoint)MapPoints[PointIndex];          
+
+                        if (TempPoint.PointLocation == SelectedPoint.PointLocation)
+                        {                            
+                            break;
+                        }
+                    }                  
+                    MapPoints.RemoveAt(PointIndex);                    
+                    MapPoints.Insert(PointIndex, NewPoint);                    
+
+            }
+
+        }
 
         public void Point_TouchMove(Location MapLocation)
         {            
-            surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);
-            surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;
-            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);            
-            PointSelected = false;           
+
+            surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);  
+            //remove selected point from MapPoints.
+            surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;            
+            //surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);            
+            PointSelected = false;
+            SynchedPoint = true;
+            GISMapPoint NewPoint = new GISMapPoint();
+            NewPoint.PointLocation = MapLocation;
+            SynchPoint(NewPoint);
+            surfacewindow.MapPolygon.RemovePolygon();
+            surfacewindow.MapPolygon.AddPolygon();
         }
 
         public void Point_TouchDown(object sender, TouchEventArgs e)
         {
-            Rectangle TouchPoint = sender as Rectangle;            
-
+            Rectangle TouchPoint = sender as Rectangle;
+           
             if (TouchPoint == SelectedPoint.pointrect)
             {
                 DeselectAll();                
@@ -105,7 +135,7 @@ namespace SurGIS2
             {                
                 SelectedPoint.pointrect = TouchPoint;
                 UpdateColors(TouchPoint);
-                PointSelected = true;
+                PointSelected = true;                
             }            
         }
 

@@ -85,39 +85,6 @@ namespace SurGIS2
                 NewPolygon.Locations.Add(testPoint.PointLocation);
             }
         }
-
-        /*
-         * this was used to take the Points from the SelectedPolygon and say that that are indeed connected to the SelectedPolygon, and nothing else.
-         * it also is suppose to allow you to move a selected point if that point is connected to the polygon.
-         */
-
-        //public void FindPoint(GISMapPoint SelectedPoint)
-        //{
-        //    foreach (MapPolygon Polygon in MapPolygons)
-        //    {
-        //        foreach (Location GMPoint in Polygon.Locations)
-        //        {
-        //            if (SelectedPoint.PointLocation.Equals(GMPoint))
-        //            {
-        //                MovePoint(GMPoint, Polygon, SelectedPoint);
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //}
-
-        /*
-         * this is where we tried to make it so that a selected point is able to be moved. but we only want the points that are connected to a SelectedPolygon to move
-         * which leads us to the commented out methods and errors in the Polygon_TouchDown part and the AddPoint part.
-         */
-
-        internal void MovePoint(GISMapPoint GMPoint, GISMapPolygon Polygon, GISMapPoint SelectedPoint)
-        {
-            GMPoint.PointLocation = SelectedPoint.PointLocation;
-            Polygon.AddPolygon();
-        }
-
     
         public void AddPolygon()
         {
@@ -163,9 +130,9 @@ namespace SurGIS2
                                 
                     surfacewindow.MapPolygon.GMPoint.AddPolyPoint = true;    // set the draw point mode to true
                     
-                    foreach (Location TempLocation in TouchPolygon.Locations)  // step through the points in the selected polygon
+                    foreach (Location MapPoints in TouchPolygon.Locations)  // step through the points in the selected polygon
                     {
-                        surfacewindow.MapPolygon.GMPoint.AddPoint(TempLocation);  // draw the point from the polygon on the map
+                        surfacewindow.MapPolygon.GMPoint.AddPoint(MapPoints);  // draw the point from the polygon on the map
                     }
 
                     surfacewindow.MapPolygon.GMPoint.AddPolyPoint = false;       // turn off the point drawing.         
@@ -201,6 +168,11 @@ namespace SurGIS2
             UpdateColors(Dummy);
             surfacewindow.MapPolygon.GMPoint.MapPoints = new ArrayList(); 
             surfacewindow.MainMap.PointLayer.Children.Clear();                       
+        }
+
+        public void RemovePolygon()
+        {
+            surfacewindow.MainMap.GISlayer.Children.Remove(SelectedPolygon);
         }
 
         public void ClearMapPolies()    // deletes all polygons from the map
