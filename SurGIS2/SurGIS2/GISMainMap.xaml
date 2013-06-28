@@ -23,8 +23,6 @@
             <Setter Property="Padding" Value="10px 0 0 0"/>
             <Setter Property="Margin" Value="0 0 0 0"  />
         </Style>
-
-
     </UserControl.Resources>
     
 
@@ -64,20 +62,10 @@
                          Click on the map to create the polygon points
                     </TextBlock>
 
-  
-
-    <!--<s:ScatterView >-->
-
-               
-
-  
-                        
-                    <!--</s:ScatterView>-->
-
-
-
-
-        </m:Map>
+                   <!--<s:ScatterView >-->      
+                 <!--</s:ScatterView>-->
+              </m:Map>
+            
    
     <!--<s:ScatterView >-->
 
@@ -86,12 +74,7 @@
                 <m:MapLayer x:Name="NewPolygonLayer">
 
                 </m:MapLayer>
-                <s:SurfaceButton x:Name="btnAddCities" Click="btnAddCities_Click" Margin="5">
-                    <TextBlock x:Name="txtButton11">Add Cities</TextBlock>
-                </s:SurfaceButton>
-                <s:SurfaceButton x:Name="btnRemoveCities" Click="btnRemoveCities_Click" Margin="5">
-                    <TextBlock x:Name="txtButton22">Remove Cities</TextBlock>
-                </s:SurfaceButton>
+   
             </StackPanel>
         </s:ScatterViewItem>
      
@@ -100,34 +83,7 @@
                 
 <!--<s:ScatterView >-->       
     
-        <s:ScatterViewItem MinWidth="300" MaxHeight="50" Padding="10">
-            <s:SurfaceListBox Padding="10" HorizontalContentAlignment="Center">
-                <!--<StackPanel Orientation="Horizontal" Opacity="0.7"  HorizontalAlignment="Center">-->
-                <s:SurfaceListBoxItem>
-                    <s:SurfaceButton x:Name="btnNewYork" Click="ChangeMapView_Click" Tag="40.7199,-74.0030,0.0000 12.0000" Margin="5">
-                        <TextBlock>New York</TextBlock>
-                    </s:SurfaceButton>
-                </s:SurfaceListBoxItem>
-
-                <s:SurfaceListBoxItem>
-                    <s:SurfaceButton x:Name="btnSanFrancisco" Click="ChangeMapView_Click" Tag="37.6801,-122.3395,0.0000 11.0000" Margin="5">
-                        <TextBlock>San Francisco</TextBlock>
-                    </s:SurfaceButton>
-                </s:SurfaceListBoxItem>
-                <s:SurfaceListBoxItem>
-                    <s:SurfaceButton x:Name="btnVancouver" Click="ChangeMapView_Click" Tag="49.2765,-123.1030,0.0000 14.0000" Margin="5">
-                        <TextBlock>Vancouver</TextBlock>
-                    </s:SurfaceButton>
-                </s:SurfaceListBoxItem>
-                <s:SurfaceListBoxItem>
-                    <ComboBox SelectionChanged="AnimationLevel_SelectionChanged" SelectedIndex="1" Margin="10" Height="20">
-                        <ComboBoxItem Content="None" />
-                        <ComboBoxItem Content="Full" />
-                    </ComboBox>
-                </s:SurfaceListBoxItem>
-                <!--</StackPanel>-->
-            </s:SurfaceListBox>
-        </s:ScatterViewItem>
+       
 <!--</s:ScatterView >-->
 
 

@@ -108,7 +108,7 @@ namespace SurGIS2
         {
             ScatterViewItem ControlScatterView = new ScatterViewItem();
             ControlScatterView.Width = 680;
-            ControlScatterView.Height = 200;
+            ControlScatterView.Height = 90;
             ControlScatterView.CanScale = false;
             ControlScatterView.ZIndex = 2;
             ControlScatterView.Content = ControlPanel;

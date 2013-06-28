@@ -119,16 +119,6 @@ namespace SurGIS2
         }
 
 
-        private void ChangeMapView_Click(object sender, RoutedEventArgs e)
-        {
-            // Parse the information of the button's Tag property
-            string[] tagInfo = ((Button)sender).Tag.ToString().Split(' ');
-            Location center = (Location)locConverter.ConvertFrom(tagInfo[0]);
-            double zoom = System.Convert.ToDouble(tagInfo[1]);
-
-            // Set the map view
-            MapTileOverlay.SetView(center, zoom);
-        }
 
 
         private void AnimationLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -442,25 +432,11 @@ namespace SurGIS2
             tileLayer.Opacity = tileOpacity;
         }
 
-        private void btnAddCities_Click( object sender, RoutedEventArgs e)
-        {
-            Button b = new Button();
-      
-           
-
-         List<Button> myDinamicButtonsList = new List<Button>();
-  
-
-
-
-
-        }
-
-        private void btnRemoveCities_Click(object sender, RoutedEventArgs e)
+        private void btnMode_Click( object sender, RoutedEventArgs e)
         {
 
 
-   
+
         }
 
         ////////REST service
@@ -606,7 +582,7 @@ namespace SurGIS2
         public void Search_Click(object sender, RoutedEventArgs e)
         {
             //Clear prior search
-            //// myMap.Visibility = Visibility.Hidden;
+            surfaceWindow.MainMap.Visibility = Visibility.Hidden;
             ////myMapLabel.Visibility = Visibility.Collapsed;
             //// myMap.Children.Clear();
             SearchResults.Visibility = Visibility.Collapsed;
@@ -615,10 +591,10 @@ namespace SurGIS2
 
 
             //Get latitude and longitude coordinates for specified location
-            //////// XmlDocument searchResponse = Geocode(SearchNearby.Text);
+            XmlDocument searchResponse = Geocode(SearchNearby.Text);
 
             //Find and display points of interest near the specified location
-            //// FindandDisplayNearbyPOI(searchResponse);
+            FindandDisplayNearbyPOI(searchResponse);
         }
 
 
@@ -654,6 +630,8 @@ namespace SurGIS2
             Label1.Text = tb.Text;
         }
 *///////
+
+
     }
   }
 
