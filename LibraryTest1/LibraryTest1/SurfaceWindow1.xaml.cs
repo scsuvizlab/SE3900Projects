@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,28 +16,103 @@ using Microsoft.Surface;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
-using Microsoft.Maps.MapControl.WPF;
 
-namespace DemoProject
+namespace LibraryTest1
 {
     /// <summary>
     /// Interaction logic for SurfaceWindow1.xaml
     /// </summary>
+    /// 
+
+    
     public partial class SurfaceWindow1 : SurfaceWindow
     {
-        public ImageContainer IContainer;
         /// <summary>
         /// Default constructor.
         /// </summary>
+        /// 
+        #region GLOBALS
+        public LibraryStack1 LibStack;
+        public LibraryBar1 LibBar;
+
+
+        #endregion
+
         public SurfaceWindow1()
         {
             InitializeComponent();
-            //Initialize ImageContainer here.
-            scatterView1.Items.Add(IContainer);
-            //RightDock.Children.Add(IContainer);
+
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
+
+            LibStack = new LibraryStack1(this);
+            LibBar = new LibraryBar1(this);
+           
+
+         
+             AddLibraryItems();
+             AddLibBar();
+             AddLibraryStack();
+
         }
+
+     
+       public void AddLibraryStack ()
+        {
+
+            ScatterViewItem NewSVI = new ScatterViewItem();
+            NewSVI.Width = 300;
+            NewSVI.Name = "LibStackSVI";
+            NewSVI.Height = 300;
+            //NewSVI.Background = null;
+            NewSVI.Content = LibStack;
+            LibScatterView.Items.Add(NewSVI);
+
+
+        }
+
+        void AddLibBar()
+        {
+            ScatterViewItem libbarscatterview = new ScatterViewItem();
+            libbarscatterview.Width = 500;
+            libbarscatterview.Height = 250;
+            libbarscatterview.Content = LibBar;
+            LibScatterView.Items.Add(libbarscatterview);
+            //TopImageDockPanel.Children.Add(libbarscatterview);
+           
+
+        
+        }
+
+
+        void AddLibraryItems()
+     {
+         foreach (string file in Directory.GetFiles(@".\Images", "*.png"))
+         {
+             Image img = new Image();
+             BitmapImage BMP= new BitmapImage();
+             BMP.BeginInit();
+                 BMP.UriSource = new Uri(file, UriKind.RelativeOrAbsolute);
+             BMP.EndInit();
+
+             LibraryStackItem LSI = new LibraryStackItem();
+             LibraryBarItem LBI = new LibraryBarItem();
+             LBI.Width = 100;
+             LBI.Height = 100;          
+             
+             LSI.Background = new ImageBrush(BMP);
+             LBI.Background = new ImageBrush(BMP);
+           
+            
+
+             LibStack.LibraryImageStack.Items.Add(LSI);
+             LibBar.ImageLibraryBar.Items.Add(LBI);
+           
+         }
+       
+     }
+
+        #region DEFAULT
 
         /// <summary>
         /// Occurs when the window is about to close. 
@@ -103,12 +179,6 @@ namespace DemoProject
         {
             //TODO: disable audio, animations here
         }
-
-        private void MainAppWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        
+        #endregion
     }
 }

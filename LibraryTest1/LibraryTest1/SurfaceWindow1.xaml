@@ -1,0 +1,21 @@
+﻿<s:SurfaceWindow x:Class="LibraryTest1.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="LibraryTest1" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="338" d:DesignWidth="599" SizeToContent="WidthAndHeight">
+  <Grid>
+        <DockPanel Height="100" HorizontalAlignment="Left" Name="TopImageDockPanel" VerticalAlignment="Top" Width="200">
+            <s:LibraryContainer HorizontalAlignment="Left" Name="TopImageLibraryContainer" VerticalAlignment="Top" >
+                <s:LibraryContainer.BarView>
+                    <s:BarView Rows="1">
+                        
+                    </s:BarView>
+                </s:LibraryContainer.BarView>
+            </s:LibraryContainer>
+        </DockPanel>
+        <s:ScatterView Name="LibScatterView">
+            
+        </s:ScatterView>
+
+    </Grid>
+</s:SurfaceWindow>
