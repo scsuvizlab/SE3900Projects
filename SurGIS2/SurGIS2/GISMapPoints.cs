@@ -113,7 +113,7 @@ namespace SurGIS2
             surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);  
             //remove selected point from MapPoints.
             surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;            
-            //surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);            
+            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);            
             PointSelected = false;
             SynchedPoint = true;
             GISMapPoint NewPoint = new GISMapPoint();
