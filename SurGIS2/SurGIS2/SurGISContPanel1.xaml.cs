@@ -206,5 +206,10 @@ namespace SurGIS2
 
 
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            surfacewindow.Exit();
+        }
     }
 }

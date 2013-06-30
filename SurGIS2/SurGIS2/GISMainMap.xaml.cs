@@ -591,10 +591,10 @@ namespace SurGIS2
 
 
             //Get latitude and longitude coordinates for specified location
-            XmlDocument searchResponse = Geocode(SearchNearby.Text);
+          //  XmlDocument searchResponse = Geocode(SearchNearby.Text);
 
             //Find and display points of interest near the specified location
-            FindandDisplayNearbyPOI(searchResponse);
+         //   FindandDisplayNearbyPOI(searchResponse);
         }
 
 

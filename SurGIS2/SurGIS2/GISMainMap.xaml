@@ -90,7 +90,7 @@
 
 
         <!--<s:ScatterView >-->
-        <s:ScatterViewItem MinWidth="600" MaxHeight="100">
+        <!--<s:ScatterViewItem MinWidth="600" MaxHeight="100">
             <StackPanel Orientation="Horizontal" Opacity="0.7"  HorizontalAlignment="Center">
                 <Label Style="{StaticResource RedLabel}" Canvas.Top="0" >Search and Map Entities Near a Location</Label>
                 <Label Canvas.Left="0" Canvas.Bottom ="0"  Foreground="#FF0E6EDC" AllowDrop="True" FontWeight="Bold" Content="Search for"></Label>
@@ -110,7 +110,7 @@
                 <TextBox Height="25" Name="SearchNearby" Width="175" Text="Insert location" Canvas.Right="0" Canvas.Top="0"  />
                 <s:SurfaceButton Click="Search_Click" Margin="0" HorizontalAlignment="Right" Canvas.Left="0" Canvas.Top="0">Search</s:SurfaceButton>
             </StackPanel>
-        </s:ScatterViewItem>
+        </s:ScatterViewItem>-->
 
 <!--</s:ScatterView >-->
 

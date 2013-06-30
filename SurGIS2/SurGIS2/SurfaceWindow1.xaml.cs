@@ -88,8 +88,7 @@ namespace SurGIS2
            
             // adds the map to the main window
             
-           AddMap();
-        
+            AddMap();       
             AddControl();
            
             MainMap.MapTileOverlay.TouchDown += new EventHandler<TouchEventArgs>(Map_Touch_Event);
@@ -106,22 +105,33 @@ namespace SurGIS2
 
         void AddControl()
         {
-            ScatterViewItem ControlScatterView = new ScatterViewItem();
-            ControlScatterView.Width = 680;
-            ControlScatterView.Height = 90;
-            ControlScatterView.CanScale = false;
-            ControlScatterView.ZIndex = 2;
-            ControlScatterView.Content = ControlPanel;
-            MainScatterView.Items.Add(ControlScatterView);
-            //ControlScatterView.IsTopmostOnActivation = true;
-            //ControlScatterView.IsContainerActive = true;
-            //ControlScatterView.ContainerStaysActive = true;
+            ScatterViewItem ControlScatterViewItem = new ScatterViewItem();
+            ControlScatterViewItem.Width = 680;
+            ControlScatterViewItem.Height = 90;
+            ControlScatterViewItem.CanScale = false;
+            ControlScatterViewItem.ZIndex = 4;
+            ControlScatterViewItem.Content = ControlPanel;
+
+           
+            
+            ControlScatterViewItem.IsTopmostOnActivation = true;
+            ControlScatterViewItem.IsContainerActive = true;
+
+            ControlScatterViewItem.ContainerStaysActive = true;
+            ScatterView ControlSV = new ScatterView();
+            MainGrid.Children.Add(ControlSV);
+            ControlSV.Items.Add(ControlScatterViewItem);
+
 
         }
         void AddMap()
         {
             // build a scatterviewitem to put the map in.
-            ScatterViewItem MapScatterViewItem = new ScatterViewItem();
+       /* 
+        * The following code creates a scatterview item for the map.  Without it the map is full screen
+        * 
+        * 
+         ScatterViewItem MapScatterViewItem = new ScatterViewItem();
             MapScatterViewItem.Width = 900;
             MapScatterViewItem.Height = 600;
             MapScatterViewItem.Padding = new Thickness(20);
@@ -130,6 +140,10 @@ namespace SurGIS2
             MapScatterViewItem.ZIndex = 1;
 
             MainScatterView.Items.Add(MapScatterViewItem);
+         */
+            MainGrid.Children.Add(MainMap);
+
+
         }
         #endregion
 
@@ -235,7 +249,10 @@ namespace SurGIS2
                         }
                 }
                                              
-            }
+            } // if
+
+              
+
         }
 
         //  This toggles the polycreation mode of the map
@@ -264,9 +281,14 @@ namespace SurGIS2
 
         #endregion
 
-     
 
 
+
+
+        internal void Exit()
+        {
+            this.Close();
+        }
     }
 
 

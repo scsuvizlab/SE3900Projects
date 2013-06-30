@@ -24,7 +24,8 @@
 
 
         <s:SurfaceButton Name="PolyGonToggleButton" Click="PolyGonToggleButton_Click" Content="Add Poly" Margin="5" Grid.Column="0" Grid.Row="0"/>
-
+        <s:SurfaceButton Name="ExitButton" Click="ExitButton_Click"  Content="Exit" Margin="5" Grid.Column="5" Grid.Row="0"/>
+        
         <s:SurfaceButton x:Name="btnChangeModes" Click="btnMode_Click" Margin="5" Grid.Column="1" Grid.Row="0">
             <TextBlock x:Name="txtButton11">Mode</TextBlock>
                 </s:SurfaceButton>
