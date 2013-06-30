@@ -33,6 +33,8 @@ namespace SurGIS2
         SurfaceWindow1 surfacewindow;
         LocationConverter locConverter = new LocationConverter();
 
+
+       
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -52,10 +54,10 @@ namespace SurGIS2
 
         // MapTileLayer tileLayer;
         //  private double tileOpacity = 0.50;
-
+        string MyMapMode = "Roads";
         string BingMapsKey = "AkrxDoVF81cNDLiNXWiVCzeOT3hrtspPyJUiMHxQcO0wd-tLAX7p8GCBaWPwI-PO";
         SurfaceWindow1 surfaceWindow;
-
+            
         public SurGISContPanel1(SurfaceWindow1 ProgramWindow)
         {
             surfacewindow = ProgramWindow;
@@ -76,8 +78,21 @@ namespace SurGIS2
 
         private void btnMode_Click(object sender, RoutedEventArgs e)
         {
-           
 
+            if (MyMapMode == "ArialWithLabels")
+            {
+
+                surfacewindow.MainMap.MapTileOverlay.Mode = new RoadMode();
+                MyMapMode = "Roads";
+               // ModeButton.Content = "Arial";
+
+            }
+            else
+            {
+                surfacewindow.MainMap.MapTileOverlay.Mode = new AerialMode(true);
+                MyMapMode = "ArialWithLabels";
+                //ModeButton.Content = "Roads";
+            }
 
 
         }
