@@ -60,6 +60,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LibraryContainer1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LibraryStack1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -74,6 +78,9 @@
     </Compile>
     <Compile Include="LibraryBar1.xaml.cs">
       <DependentUpon>LibraryBar1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LibraryContainer1.xaml.cs">
+      <DependentUpon>LibraryContainer1.xaml</DependentUpon>
     </Compile>
     <Compile Include="LibraryStack1.xaml.cs">
       <DependentUpon>LibraryStack1.xaml</DependentUpon>

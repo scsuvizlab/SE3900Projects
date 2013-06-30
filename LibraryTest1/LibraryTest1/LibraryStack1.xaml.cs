@@ -29,18 +29,55 @@ namespace LibraryTest1
     {
         
         SurfaceWindow1 surfacewindow;
+     //   private RoutedEventHandler LSI_Selected;
 
         public LibraryStack1(SurfaceWindow1 window)
         {
             InitializeComponent();
             
             surfacewindow = window;
+
+            AddLibraryStackItems();
       
 
         }
-     
-      
 
+        private void AddLibraryStackItems()
+        {
+
+            foreach (string file in Directory.GetFiles(@".\Images", "*.png"))
+            {
+                Image img = new Image();
+                BitmapImage BMP = new BitmapImage();
+                BMP.BeginInit();
+                BMP.UriSource = new Uri(file, UriKind.RelativeOrAbsolute);
+                BMP.EndInit();
+
+                LibraryStackItem LSI = new LibraryStackItem();
+
+              //  LSI.Name = file;
+
+                LSI.Background = new ImageBrush(BMP);
+               LSI.TouchUp +=new EventHandler<TouchEventArgs>(LSI_TouchUp);
+
+               LibraryImageStack.Items.Add(LSI);
+                
+            }
+        }
+
+
+        private void LSI_TouchUp(object sender, TouchEventArgs e)
+        {
+            if (true)
+            {
+            }
+        }
+
+        private void LibraryImageStack_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+          
+        }
 
     }
 }

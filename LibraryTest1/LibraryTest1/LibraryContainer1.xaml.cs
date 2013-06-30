@@ -1,9 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -20,20 +20,21 @@ using Microsoft.Surface.Presentation.Input;
 namespace LibraryTest1
 {
     /// <summary>
-    /// Interaction logic for LibraryBar1.xaml
+    /// Interaction logic for LibraryContainer1.xaml
     /// </summary>
-    public partial class LibraryBar1 : UserControl
+    /// 
+    public partial class LibraryContainer1 : UserControl
     {
         SurfaceWindow1 surfacewindow;
-
-        public LibraryBar1(SurfaceWindow1 programwindow)
+        public LibraryContainer1(SurfaceWindow1 programwindow)
         {
             surfacewindow = programwindow;
             InitializeComponent();
-            AddLibraryBarItems();
+
+            AddLibraryContainerItems();
         }
 
-        private void AddLibraryBarItems()
+        private void AddLibraryContainerItems()
         {
             foreach (string file in Directory.GetFiles(@".\Images", "*.png"))
             {
@@ -43,19 +44,18 @@ namespace LibraryTest1
                 BMP.UriSource = new Uri(file, UriKind.RelativeOrAbsolute);
                 BMP.EndInit();
 
-              
                 LibraryBarItem LBI = new LibraryBarItem();
+                
                 LBI.Width = 100;
                 LBI.Height = 100;
 
-              
                 LBI.Background = new ImageBrush(BMP);
+
+                
                
-               ImageLibraryBar.Items.Add(LBI);
+              
 
             }
         }
-    
-
     }
 }

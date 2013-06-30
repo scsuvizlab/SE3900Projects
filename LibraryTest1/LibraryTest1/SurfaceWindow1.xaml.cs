@@ -34,7 +34,7 @@ namespace LibraryTest1
         #region GLOBALS
         public LibraryStack1 LibStack;
         public LibraryBar1 LibBar;
-
+        public LibraryContainer1 LibCont;
 
         #endregion
 
@@ -47,13 +47,24 @@ namespace LibraryTest1
 
             LibStack = new LibraryStack1(this);
             LibBar = new LibraryBar1(this);
+            LibCont = new LibraryContainer1(this);
            
 
          
-             AddLibraryItems();
+          //   AddLibraryItems();
              AddLibBar();
              AddLibraryStack();
+             AddLibContainer();
 
+        }
+
+        private void AddLibContainer()
+        {
+            ScatterViewItem NewSVI = new ScatterViewItem();
+            NewSVI.Width = 500;
+            NewSVI.Height = 300;
+            NewSVI.Content = LibCont;
+            LibScatterView.Items.Add(NewSVI);
         }
 
      
@@ -64,7 +75,7 @@ namespace LibraryTest1
             NewSVI.Width = 300;
             NewSVI.Name = "LibStackSVI";
             NewSVI.Height = 300;
-            //NewSVI.Background = null;
+            NewSVI.Background = new SolidColorBrush(Colors.Transparent);
             NewSVI.Content = LibStack;
             LibScatterView.Items.Add(NewSVI);
 
@@ -103,7 +114,7 @@ namespace LibraryTest1
              LSI.Background = new ImageBrush(BMP);
              LBI.Background = new ImageBrush(BMP);
            
-            
+         
 
              LibStack.LibraryImageStack.Items.Add(LSI);
              LibBar.ImageLibraryBar.Items.Add(LBI);
