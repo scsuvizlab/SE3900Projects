@@ -227,7 +227,7 @@ namespace SurGIS2
             TouchPoint TouchP = e.GetTouchPoint(MainMap.MapTileOverlay);                                    // get the touch point in UI pixels
             Point TPosition = TouchP.Position;                                                              // need a point object to do the conversion
             Location MapTouchPointLocation =   MainMap.MapTileOverlay.ViewportPointToLocation(TPosition);   // convert the point to a map coord location
-            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);                                              // add the point to the map.            
+            MapPolygon.GMPoint.AddPoint(MapTouchPointLocation);                                             // add the point to the map.            
             
                 if (MapPolygon.GMPoint.PointSelected)    // if there is a point selected
                 {     
@@ -235,13 +235,17 @@ namespace SurGIS2
 
                         case 0:  
                         {
-                            MapPolygon.GMPoint.TouchCounter++;  
+                            MapPolygon.GMPoint.TouchCounter++;
+                            MapPolygon.GMPoint.SelectedPoint.PointLocation = MapTouchPointLocation;
+                            MapPolygon.GMPoint.g = MapPolygon.GMPoint.SelectedPoint;
+                            MapPolygon.GMPoint.PointDistance(MapTouchPointLocation);
                             break; // do nothing till next time through
                         }
                         case 1:
                         {
                             // move the actual point.  It should take two touches to get to this point
-                            MapPolygon.GMPoint.AddPolyPoint = true; 
+                            //MapPolygon.GMPoint.SelectedPoint.PointLocation = MapTouchPointLocation;
+                            MapPolygon.GMPoint.AddPolyPoint = true;
                             MapPolygon.GMPoint.Point_TouchMove(MapTouchPointLocation);
                             MapPolygon.GMPoint.AddPolyPoint = false;
                             MapPolygon.GMPoint.TouchCounter = 0;

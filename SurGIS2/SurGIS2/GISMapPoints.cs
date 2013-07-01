@@ -57,6 +57,8 @@ namespace SurGIS2
         public bool PointSelected = false;
         public int TouchCounter = 0;
         public bool SynchedPoint = false;
+        public GISMapPoint g = new GISMapPoint();
+        public int PointIndex;
 
         // Global handler back to the main program window.
         private SurfaceWindow1 surfacewindow;
@@ -82,59 +84,77 @@ namespace SurGIS2
             }
         }
 
-        public void SynchPoint(GISMapPoint NewPoint)
+       public bool FindDistance(Location MapPointLocation, Location g)
+       {
+           double distance;
+           double DistanceCheck = 0.03 / surfacewindow.MainMap.MapTileOverlay.ZoomLevel;
+
+           if (surfacewindow.MainMap.MapTileOverlay.ZoomLevel != 0)
+           {
+               distance = Math.Abs(Math.Sqrt(Math.Pow(MapPointLocation.Latitude - g.Latitude, 2) +
+                          Math.Pow(MapPointLocation.Longitude - g.Longitude, 2)));
+               
+               if (distance < DistanceCheck)
+               {
+                   return true;
+               }
+               else
+               {
+                   return false;
+               }
+           }
+           else
+           {
+               distance = Math.Abs(Math.Sqrt(Math.Pow(MapPointLocation.Latitude - g.Latitude, 2) +
+                          Math.Pow(MapPointLocation.Longitude - g.Longitude, 2)));
+               if (distance < 0.3)
+               {
+                   return true;
+               }
+               else
+               {
+                   return false;
+               }
+           }
+       }
+
+        public void PointDistance(Location MapPointLocation)
         {
+            foreach( GISMapPoint g in MapPoints)
+            {
+                if( FindDistance(MapPointLocation, g.PointLocation))
+                {
 
-            int PointIndex = 0;
-            GISMapPoint TempPoint = new GISMapPoint();
-
-            if(SynchedPoint)
-            {               
-                    for (PointIndex = 0; PointIndex <= MapPoints.Count; PointIndex++)
-                    {
-
-                        TempPoint = (GISMapPoint)MapPoints[PointIndex];          
-
-                        if (TempPoint.PointLocation == SelectedPoint.PointLocation)
-                        {                            
-                            break;
-                        }
-                    }                  
-                    MapPoints.RemoveAt(PointIndex);                    
-                    MapPoints.Insert(PointIndex, NewPoint);                    
-
-            }
-
+                    PointIndex = MapPoints.IndexOf(g);
+                    break;
+                }
+            }            
         }
-
-        public void Point_TouchMove(Location MapLocation)
+        
+        public void Point_TouchMove(Location MapPointLocation)
         {            
-
-            surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);  
-            //remove selected point from MapPoints.
-            surfacewindow.MapPolygon.GMPoint.SelectedPoint.PointLocation = MapLocation;            
-            surfacewindow.MapPolygon.GMPoint.AddPoint(SelectedPoint.PointLocation);            
-            PointSelected = false;
-            SynchedPoint = true;
+            surfacewindow.MainMap.PointLayer.Children.Remove(SelectedPoint.pointrect);                        
             GISMapPoint NewPoint = new GISMapPoint();
-            NewPoint.PointLocation = MapLocation;
-            SynchPoint(NewPoint);
+            NewPoint.PointLocation = MapPointLocation;
+            MapPoints.RemoveAt(PointIndex);
+            MapPoints.Insert(PointIndex, NewPoint);            
+            PointSelected = false;            
             surfacewindow.MapPolygon.RemovePolygon();
             surfacewindow.MapPolygon.AddPolygon();
         }
 
         public void Point_TouchDown(object sender, TouchEventArgs e)
         {
-            Rectangle TouchPoint = sender as Rectangle;
+            Rectangle TouchRect = sender as Rectangle;
            
-            if (TouchPoint == SelectedPoint.pointrect)
+            if (TouchRect == SelectedPoint.pointrect)
             {
                 DeselectAll();                
             }
             else
-            {                
-                SelectedPoint.pointrect = TouchPoint;
-                UpdateColors(TouchPoint);
+            {                               
+                SelectedPoint.pointrect = TouchRect;                
+                UpdateColors(TouchRect);                
                 PointSelected = true;                
             }            
         }
